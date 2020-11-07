@@ -18,10 +18,12 @@ const FormField = (props) => {
     className,
     inputPropsTF,
     placeholder,
+    ...otherProps
   } = props
 
   return (
     <StyledFormField
+      {...otherProps}
       disabled={disabled}
       className={className}
       label={label}
