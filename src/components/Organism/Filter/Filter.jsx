@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import { createFormField } from '../../../helpers/utils'
+import { FilterButton } from '../../Atom/FilterButton'
 import { FormField } from '../../Molecule/FormField'
-import { StyledFilter, StyledForm } from './styles'
+import { AdvancedFilter } from '../AdvancedFilter'
+import { StyledFilter, StyledForm, MainFilter } from './styles'
 
 const Filter = () => {
   const filter = [
@@ -95,25 +94,30 @@ const Filter = () => {
     },
   ]
 
+  const [showMoreFilters, setShowMoreFilters] = useState(false)
+
+  const toggleMoreFilters = () => {
+    setShowMoreFilters(!showMoreFilters)
+  }
+
   return (
     <StyledFilter component="section">
       <Formik initialValues={{}} validationSchema={{}}>
         {(formikProps) => {
           return (
             <StyledForm component="form">
-              <FormField
-                name="playListName"
-                label="Nome da playlist"
-                {...formikProps}
-              />
+              <MainFilter>
+                <FormField
+                  name="playListName"
+                  label="Nome da playlist"
+                  {...formikProps}
+                />
+                <FilterButton onClick={toggleMoreFilters} />
+              </MainFilter>
 
-              <Grid container spacing={3} className="api-filters" wrap="wrap">
-                {filter.map((f) => (
-                  <Grid item md={3} sm={4} xs={12} key={`grid-${f.id}`}>
-                    {createFormField({ fieldData: f, formikProps })}
-                  </Grid>
-                ))}
-              </Grid>
+              {showMoreFilters && (
+                <AdvancedFilter formikProps={formikProps} filters={filter} />
+              )}
             </StyledForm>
           )
         }}

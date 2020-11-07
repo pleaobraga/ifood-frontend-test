@@ -16,6 +16,7 @@ export const createFormField = ({
         name={fieldData.id}
         label={fieldData.name}
         select={true}
+        size="small"
         {...otherProps}
       >
         {fieldData.values.map((value) => (
@@ -32,6 +33,7 @@ export const createFormField = ({
       {...formikProps}
       name={fieldData.id}
       label={fieldData.name}
+      size="small"
       {...otherProps}
     />
   )
