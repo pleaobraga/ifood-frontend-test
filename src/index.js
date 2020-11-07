@@ -4,7 +4,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
 import rootReducers from './redux'
-import './styles/_main.scss'
 import Routes from './routes'
 
 const composeEnhancers =
