@@ -3,11 +3,11 @@ import { storiesOf } from '@storybook/react'
 import { text } from '@storybook/addon-knobs'
 import { withFormValues } from '../../../../.storybook/withFormValues'
 import MenuItem from '@material-ui/core/MenuItem'
-import { FormField } from './'
+import { FormField } from '.'
 
 const options = ['test1', 'test2']
 
-export default storiesOf('Components | Atom/FormField', module)
+export default storiesOf('Components | Molecule/FormField', module)
   .addDecorator(withFormValues({ test: '' }))
   .add(
     'Text',
@@ -56,7 +56,11 @@ export default storiesOf('Components | Atom/FormField', module)
         propTables: [FormField],
         text: `
           ~~~js
-          <FormField label="Test" name="test" {..props} />
+          <FormField label="Test" name="test" select {..props} >
+            <MenuItem value={option}>
+              {name}
+            </MenuItem>
+          </FormField>
           ~~~
       `,
       },
