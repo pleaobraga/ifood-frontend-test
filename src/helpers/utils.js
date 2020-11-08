@@ -1,5 +1,5 @@
 import React from 'react'
-import * as yup from 'yup'
+import schemaValidator from './yupConfig'
 import { forIn } from 'lodash'
 import { FormField } from '../components/Molecule/FormField'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -39,20 +39,17 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
 export const getYupType = (type) => {
   switch (type) {
     case 'STRING':
-      return 'string'
+      return { type: 'string', message: 'Insira caracteres válidos' }
 
     case 'INTEGER':
     case 'FLOAT':
-      return 'number'
+      return { type: 'number', message: 'Insira um número válido' }
 
     case 'DATE_TIME':
-      return 'date'
-
-    case 'BOOLEAN':
-      return 'boolean'
+      return { type: 'date', message: 'Insira uma data válida' }
 
     default:
-      return 'mixed'
+      return { type: 'mixed', message: 'Insira caracteres válidos' }
   }
 }
 
@@ -60,7 +57,7 @@ export const createYupFieldSchema = (schema, config) => {
   const { id, validation } = config
 
   if (!validation) {
-    schema[id] = yup.mixed()
+    schema[id] = schemaValidator.mixed()
     return schema
   }
 
@@ -68,7 +65,9 @@ export const createYupFieldSchema = (schema, config) => {
 
   const validationType = getYupType(entityType || primitiveType)
 
-  let validator = yup[validationType]()
+  let validator = schemaValidator[validationType.type]().typeError(
+    validationType.message
+  )
 
   forIn(otherValidations, (value, key) => {
     if (!validator[key]) {
@@ -85,7 +84,7 @@ export const createYupFieldSchema = (schema, config) => {
 export const createYupSchema = (fields) => {
   const fieldsSchema = fields.reduce(createYupFieldSchema, {})
 
-  return yup.object().shape(fieldsSchema)
+  return schemaValidator.object().shape(fieldsSchema)
 }
 
 export const createInitialValues = (fields) => {

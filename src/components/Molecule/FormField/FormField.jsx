@@ -9,7 +9,6 @@ const FormField = (props) => {
     handleChange,
     handleBlur,
     errors,
-    touched,
     name,
     label,
     type,
