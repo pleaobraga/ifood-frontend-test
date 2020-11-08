@@ -10,12 +10,13 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
   if (fieldData.values) {
     return (
       <FormField
-        {...formikProps}
         name={fieldData.id}
         label={fieldData.name}
         select={true}
         size="small"
+        {...formikProps}
       >
+        <MenuItem value={''} />
         {fieldData.values.map((value) => (
           <MenuItem key={value.value} value={value.value}>
             {value.name}
@@ -27,10 +28,10 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
 
   return (
     <FormField
-      {...formikProps}
       name={fieldData.id}
       label={fieldData.name}
       size="small"
+      {...formikProps}
     />
   )
 }
@@ -59,7 +60,8 @@ export const createYupFieldSchema = (schema, config) => {
   const { id, validation } = config
 
   if (!validation) {
-    return (schema[id] = yup.mixed())
+    schema[id] = yup.mixed()
+    return schema
   }
 
   const { primitiveType, entityType, ...otherValidations } = validation
@@ -84,4 +86,11 @@ export const createYupSchema = (fields) => {
   const fieldsSchema = fields.reduce(createYupFieldSchema, {})
 
   return yup.object().shape(fieldsSchema)
+}
+
+export const createInitialValues = (fields) => {
+  return fields.reduce((initialValues, field) => {
+    initialValues[field.id] = ''
+    return initialValues
+  }, {})
 }

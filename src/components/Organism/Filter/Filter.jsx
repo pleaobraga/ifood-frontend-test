@@ -12,7 +12,7 @@ import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
-import { createYupSchema } from '../../../helpers/utils'
+import { createYupSchema, createInitialValues } from '../../../helpers/utils'
 import { StyledFilter, StyledForm, MainFilter } from './styles'
 
 const Filter = () => {
@@ -33,15 +33,23 @@ const Filter = () => {
   }
 
   const validationSchema = useMemo(() => createYupSchema(filters), [
-    createYupSchema,
     filters,
+    createYupSchema,
   ])
 
-  console.log('validationSchema', validationSchema)
+  const initialValues = useMemo(
+    () => createInitialValues([...filters, { id: 'playListName' }]),
+    [filters, createInitialValues]
+  )
 
   return (
     <StyledFilter component="section">
-      <Formik initialValues={{}} validationSchema={validationSchema}>
+      <Formik
+        enableReinitialize
+        validateOnChange
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+      >
         {(formikProps) => {
           return (
             <StyledForm component="form">
