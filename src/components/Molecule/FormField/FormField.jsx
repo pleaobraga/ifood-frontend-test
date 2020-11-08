@@ -18,12 +18,10 @@ const FormField = (props) => {
     className,
     inputPropsTF,
     placeholder,
-    ...otherProps
   } = props
 
   return (
     <StyledFormField
-      {...otherProps}
       disabled={disabled}
       className={className}
       label={label}
@@ -46,7 +44,7 @@ const FormField = (props) => {
 }
 
 FormField.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   name: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired,
   handleBlur: PropTypes.func.isRequired,

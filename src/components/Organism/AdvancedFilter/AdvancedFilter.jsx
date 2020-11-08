@@ -12,7 +12,7 @@ const AdvancedFilter = ({ formikProps, filters, isFetching, error }) => {
   const renderFilters = () => {
     if (isFetching) {
       return (
-        <Box>
+        <Box paddingTop={2}>
           <CircularProgress />
         </Box>
       )
