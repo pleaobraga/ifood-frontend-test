@@ -29,8 +29,8 @@ const FormField = (props) => {
       value={get(values, name)}
       onChange={handleChange}
       onBlur={handleBlur}
-      helperText={has(errors, name) && has(touched, name) && get(errors, name)}
-      error={has(errors, name) && has(touched, name)}
+      helperText={has(errors, name) && get(errors, name)}
+      error={has(errors, name)}
       margin="normal"
       variant="outlined"
       inputProps={{ type: type }}
