@@ -1,20 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import { isEmpty } from 'lodash'
 import Typography from '@material-ui/core/Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { createFormField } from '../../../helpers/utils'
 import { StyledAdvancedFilter } from './styles'
 
-const AdvancedFilter = ({ formikProps, filters }) => {
-  return (
-    <StyledAdvancedFilter>
-      <Typography
-        element="h2"
-        color="textPrimary"
-        className="advanced-filter__title"
-      >
-        Filtros avançados
-      </Typography>
+const AdvancedFilter = ({ formikProps, filters, isFetching, error }) => {
+  const renderFilters = () => {
+    if (isFetching) {
+      return (
+        <Box>
+          <CircularProgress />
+        </Box>
+      )
+    }
+
+    if (!isEmpty(error)) {
+      return (
+        <Typography color="textPrimary">
+          Houve um erro ao carregar os filtros
+        </Typography>
+      )
+    }
+
+    if (filters.length === 0) {
+      return (
+        <Typography color="textPrimary">
+          Não existem filtros avançados
+        </Typography>
+      )
+    }
+
+    return (
       <Grid
         container
         spacing={2}
@@ -27,13 +47,28 @@ const AdvancedFilter = ({ formikProps, filters }) => {
           </Grid>
         ))}
       </Grid>
+    )
+  }
+
+  return (
+    <StyledAdvancedFilter>
+      <Typography
+        element="h2"
+        color="textPrimary"
+        className="advanced-filter__title"
+      >
+        Filtros avançados
+      </Typography>
+      {renderFilters()}
     </StyledAdvancedFilter>
   )
 }
 
 AdvancedFilter.propTypes = {
   formikProps: PropTypes.object.isRequired,
-  filters: PropTypes.array,
+  filters: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.object.isRequired,
 }
 
 AdvancedFilter.defaultProps = {

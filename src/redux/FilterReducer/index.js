@@ -2,7 +2,7 @@ export { filterReducer } from './FilterReducer'
 export { getFilterAction } from './FilterActions'
 export {
   selectAllFilters,
-  selectErrorFilters,
+  selectHasErrorFilters,
   selectFilters,
   selectIsFetchingFilters,
 } from './FilterSelector'

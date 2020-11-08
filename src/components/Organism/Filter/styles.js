@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box'
 
 export const StyledFilter = styled(Box)`
   display: flex;
-  width: 100%;
+  margin: 0 1rem;
 `
 
 export const StyledForm = styled(Box)`

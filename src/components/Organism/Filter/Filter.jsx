@@ -1,100 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
+import {
+  getFilterAction,
+  selectFilters,
+  selectAllFilters,
+  selectHasErrorFilters,
+} from '../../../redux/FilterReducer'
 import { FilterButton } from '../../Atom/FilterButton'
 import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import SearchIcon from '@material-ui/icons/Search'
 import { StyledFilter, StyledForm, MainFilter } from './styles'
 
 const Filter = () => {
-  const filter = [
-    {
-      id: 'locale',
-      name: 'Locale',
-      values: [
-        {
-          value: 'en_AU',
-          name: 'en_AU',
-        },
-        {
-          value: 'de_DE',
-          name: 'de_DE ',
-        },
-        {
-          value: 'pt_BR',
-          name: 'pt_BR',
-        },
-        {
-          value: 'fr_FR',
-          name: 'fr_FR',
-        },
-        {
-          value: 'en_US',
-          name: 'en_US',
-        },
-        {
-          value: 'es_AR',
-          name: 'es_AR',
-        },
-      ],
-    },
-    {
-      id: 'country',
-      name: 'País',
-      values: [
-        {
-          value: 'AU',
-          name: 'Australia',
-        },
-        {
-          value: 'DE',
-          name: 'Alemanhã',
-        },
-        {
-          value: 'BR',
-          name: 'Brasil',
-        },
-        {
-          value: 'PT',
-          name: 'Portugal',
-        },
-        {
-          value: 'en_US',
-          name: 'EUA',
-        },
-        {
-          value: 'RU',
-          name: 'Rússia',
-        },
-      ],
-    },
-    {
-      id: 'timestamp',
-      name: 'Data e Horário',
-      validation: {
-        primitiveType: 'STRING',
-        entityType: 'DATE_TIME',
-        pattern: 'yyyy-MM-ddTHH:mm:ss',
-      },
-    },
-    {
-      id: 'limit',
-      name: 'Quantidade',
-      validation: {
-        primitiveType: 'INTEGER',
-        min: 1,
-        max: 50,
-      },
-    },
-    {
-      id: 'offset',
-      name: 'Página',
-      validation: {
-        primitiveType: 'INTEGER',
-      },
-    },
-  ]
-
   const [showMoreFilters, setShowMoreFilters] = useState(false)
+  const dispatch = useDispatch()
+  const filtersState = useSelector(selectFilters)
+  const filters = useSelector(selectAllFilters)
+  const hasErrorFilter = useSelector(selectHasErrorFilters)
+
+  const getFilter = useCallback(() => dispatch(getFilterAction()), [dispatch])
+
+  useEffect(() => {
+    getFilter()
+  }, [getFilter])
 
   const toggleMoreFilters = () => {
     setShowMoreFilters(!showMoreFilters)
@@ -109,14 +40,23 @@ const Filter = () => {
               <MainFilter>
                 <FormField
                   name="playListName"
-                  label="Nome da playlist"
+                  placeholder="Pesquise o nome da playlist"
                   {...formikProps}
+                  inputPropsTF={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-                <FilterButton onClick={toggleMoreFilters} />
+                {filters.length > 0 && !hasErrorFilter && (
+                  <FilterButton onClick={toggleMoreFilters} />
+                )}
               </MainFilter>
 
               {showMoreFilters && (
-                <AdvancedFilter formikProps={formikProps} filters={filter} />
+                <AdvancedFilter formikProps={formikProps} {...filtersState} />
               )}
             </StyledForm>
           )
