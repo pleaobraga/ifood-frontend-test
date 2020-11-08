@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
 import content from './ContentReducer'
+import { filterReducer } from './FilterReducer'
 
-export default combineReducers({ content })
+export default combineReducers({ content, filter: filterReducer })
