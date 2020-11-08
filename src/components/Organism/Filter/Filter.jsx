@@ -43,42 +43,43 @@ const Filter = () => {
   )
 
   return (
-    <StyledFilter component="section">
-      <Formik
-        enableReinitialize
-        validateOnChange
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-      >
-        {(formikProps) => {
-          return (
-            <StyledForm component="form">
-              <MainFilter>
-                <FormField
-                  name="playListName"
-                  placeholder="Pesquise o nome da playlist"
-                  {...formikProps}
-                  inputPropsTF={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                {filters.length > 0 && !hasErrorFilter && (
-                  <FilterButton onClick={toggleMoreFilters} />
-                )}
-              </MainFilter>
+    filters.length > 0 && (
+      <StyledFilter component="section">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          validateOnChange
+        >
+          {(formikProps) => {
+            return (
+              <StyledForm component="form">
+                <MainFilter>
+                  <FormField
+                    name="playListName"
+                    placeholder="Pesquise o nome da playlist"
+                    {...formikProps}
+                    inputPropsTF={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  {filters.length > 0 && !hasErrorFilter && (
+                    <FilterButton onClick={toggleMoreFilters} />
+                  )}
+                </MainFilter>
 
-              {showMoreFilters && (
-                <AdvancedFilter formikProps={formikProps} {...filtersState} />
-              )}
-            </StyledForm>
-          )
-        }}
-      </Formik>
-    </StyledFilter>
+                {showMoreFilters && (
+                  <AdvancedFilter formikProps={formikProps} {...filtersState} />
+                )}
+              </StyledForm>
+            )
+          }}
+        </Formik>
+      </StyledFilter>
+    )
   )
 }
 
