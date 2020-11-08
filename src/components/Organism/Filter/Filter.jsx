@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import {
@@ -12,6 +12,7 @@ import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
+import { createYupSchema } from '../../../helpers/utils'
 import { StyledFilter, StyledForm, MainFilter } from './styles'
 
 const Filter = () => {
@@ -31,9 +32,16 @@ const Filter = () => {
     setShowMoreFilters(!showMoreFilters)
   }
 
+  const validationSchema = useMemo(() => createYupSchema(filters), [
+    createYupSchema,
+    filters,
+  ])
+
+  console.log('validationSchema', validationSchema)
+
   return (
     <StyledFilter component="section">
-      <Formik initialValues={{}} validationSchema={{}}>
+      <Formik initialValues={{}} validationSchema={validationSchema}>
         {(formikProps) => {
           return (
             <StyledForm component="form">
