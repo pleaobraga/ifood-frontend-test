@@ -15,6 +15,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import Box from '@material-ui/core/Box'
 import { createYupSchema, createInitialValues } from '../../../helpers/utils'
 import { StyledFilter } from './styles'
+import { Typography } from '@material-ui/core'
 
 const Filter = () => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
@@ -48,7 +49,7 @@ const Filter = () => {
 
   return (
     filters.length > 0 && (
-      <StyledFilter component="section">
+      <StyledFilter component="header">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -58,9 +59,16 @@ const Filter = () => {
             return (
               <Box className="filter__form" component="form">
                 <Box className="main-filter">
+                  <Typography
+                    className="brand"
+                    component="h2"
+                    color="textPrimary"
+                  >
+                    Spotifood
+                  </Typography>
                   <FormField
                     name="playListName"
-                    placeholder="Pesquisar nome"
+                    placeholder="Filtrar por nome"
                     {...formikProps}
                     inputPropsTF={{
                       startAdornment: (

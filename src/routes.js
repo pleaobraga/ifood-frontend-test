@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
-import { ThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider } from 'styled-components'
 import theme from './theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import DynamicImport from './components/DynamicImport'
@@ -18,16 +19,18 @@ const WelcomePage = () => (
 
 const Routes = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Suspense fallback={<ErrorPage />}>
-          <Switch>
-            <Route exact path="/" component={WelcomePage} />
-            <Route component={ErrorPage} />
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
-    </ThemeProvider>
+    <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Suspense fallback={<ErrorPage />}>
+            <Switch>
+              <Route exact path="/" component={WelcomePage} />
+              <Route component={ErrorPage} />
+            </Switch>
+          </Suspense>
+        </BrowserRouter>
+      </ThemeProvider>
+    </MuiThemeProvider>
   )
 }
 

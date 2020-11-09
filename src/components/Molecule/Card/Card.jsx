@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTheme } from '@material-ui/core/styles'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
@@ -8,10 +7,8 @@ import { Image } from '../../Atom/Image'
 import { StyledCard } from './styles'
 
 const Playlist = ({ link, imgSrc, name }) => {
-  const theme = useTheme()
-
   return (
-    <StyledCard theme={theme}>
+    <StyledCard>
       <CardContent
         className="card__content"
         component="a"

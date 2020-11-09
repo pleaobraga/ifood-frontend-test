@@ -2,10 +2,11 @@ import styled from 'styled-components'
 import Card from '@material-ui/core/Card'
 
 export const StyledCard = styled(Card)`
+  ${({ theme }) => `
   width: 182px;
 
   :hover {
-    background: ${(props) => props.theme.palette.background.paperHover};
+    background: ${theme.palette.background.paperHover};
   }
 
   .card {
@@ -28,4 +29,5 @@ export const StyledCard = styled(Card)`
       text-overflow: ellipsis;
     }
   }
+  `}
 `

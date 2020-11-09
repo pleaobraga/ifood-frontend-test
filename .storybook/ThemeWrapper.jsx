@@ -1,10 +1,12 @@
 import React from 'react'
-import { ThemeProvider } from '@material-ui/core/styles'
-
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider } from 'styled-components'
 import theme from '../src/theme'
 
 const ThemeWrapper = ({ children, store }) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+  <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>{children}</ThemeProvider>
+  </MuiThemeProvider>
 )
 
 export default ThemeWrapper
