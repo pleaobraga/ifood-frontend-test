@@ -3,7 +3,7 @@ import {
   GET_FILTER_SUCCESS,
   GET_FILTER_ERROR,
 } from './FilterActionsType'
-import { getFilterAPI } from '../../api/Filters'
+//import { getFilterAPI } from '../../api/Filters'
 
 export const getFilterStart = () => ({
   type: GET_FILTER,
@@ -19,13 +19,13 @@ export const getFilterError = (error) => ({
   error,
 })
 
-export const getFilterAction = () => (dispatch) => {
-  dispatch(getFilterStart())
+// export const getFilterAction = () => (dispatch) => {
+//   dispatch(getFilterStart())
 
-  return getFilterAPI()
-    .then((response) => {
-      dispatch(getFilterSuccess(response.data))
-      return response.data
-    })
-    .catch((error) => getFilterError(error))
-}
+//   return getFilterAPI()
+//     .then((response) => {
+//       dispatch(getFilterSuccess(response.data))
+//       return response.data
+//     })
+//     .catch((error) => getFilterError(error))
+// }

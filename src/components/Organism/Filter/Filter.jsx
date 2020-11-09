@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import {
-  getFilterAction,
   selectFilters,
   selectAllFilters,
   selectHasErrorFilters,
+  getFilterStart,
 } from '../../../redux/FilterReducer'
 import { FilterButton } from '../../Atom/FilterButton'
 import { FormField } from '../../Molecule/FormField'
@@ -22,7 +22,10 @@ const Filter = () => {
   const filters = useSelector(selectAllFilters)
   const hasErrorFilter = useSelector(selectHasErrorFilters)
 
-  const getFilter = useCallback(() => dispatch(getFilterAction()), [dispatch])
+  const getFilter = useCallback(() => dispatch(getFilterStart()), [
+    dispatch,
+    getFilterStart,
+  ])
 
   useEffect(() => {
     getFilter()

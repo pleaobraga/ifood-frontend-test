@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import { Provider } from 'react-redux'
-import ReduxThunk from 'redux-thunk'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import rootSaga from './sagas'
 import rootReducers from './redux'
 import Routes from './routes'
 
@@ -12,9 +13,13 @@ const composeEnhancers =
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose
 
-const enhancer = composeEnhancers(applyMiddleware(ReduxThunk))
+const sagaMiddleware = createSagaMiddleware()
+
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware))
 
 const store = createStore(rootReducers, enhancer)
+
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>
