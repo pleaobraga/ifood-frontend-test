@@ -12,7 +12,7 @@ export default storiesOf('Components | Molecule/FormField', module)
   .add(
     'Text',
     (props) => (
-      <div style={{ background: 'black', width: '300px', padding: '10px' }}>
+      <div style={{ background: '#303030', width: '300px', padding: '10px' }}>
         <FormField name="test" label={text('Label', 'Text field')} {...props} />
       </div>
     ),
@@ -33,7 +33,7 @@ export default storiesOf('Components | Molecule/FormField', module)
   .add(
     'Select',
     (props) => (
-      <div style={{ background: 'black', width: '300px', padding: '10px' }}>
+      <div style={{ background: '#303030', width: '300px', padding: '10px' }}>
         <FormField
           name="test"
           label={text('Label', 'Select field')}

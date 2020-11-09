@@ -12,8 +12,9 @@ import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
+import Box from '@material-ui/core/Box'
 import { createYupSchema, createInitialValues } from '../../../helpers/utils'
-import { StyledFilter, StyledForm, MainFilter } from './styles'
+import { StyledFilter } from './styles'
 
 const Filter = () => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
@@ -55,8 +56,8 @@ const Filter = () => {
         >
           {(formikProps) => {
             return (
-              <StyledForm component="form">
-                <MainFilter>
+              <Box className="filter__form" component="form">
+                <Box className="main-filter">
                   <FormField
                     name="playListName"
                     placeholder="Pesquise o nome da playlist"
@@ -72,12 +73,12 @@ const Filter = () => {
                   {filters.length > 0 && !hasErrorFilter && (
                     <FilterButton onClick={toggleMoreFilters} />
                   )}
-                </MainFilter>
+                </Box>
 
                 {showMoreFilters && (
                   <AdvancedFilter formikProps={formikProps} {...filtersState} />
                 )}
-              </StyledForm>
+              </Box>
             )
           }}
         </Formik>

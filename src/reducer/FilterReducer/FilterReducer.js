@@ -8,7 +8,7 @@ const initialState = {
 
 export const filterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_FILTER:
+    case types.GET_FILTER_REQUEST:
       return { ...state, isFetching: true }
 
     case types.GET_FILTER_SUCCESS:
