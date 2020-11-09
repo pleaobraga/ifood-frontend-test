@@ -5,8 +5,8 @@ import {
   selectFilters,
   selectAllFilters,
   selectHasErrorFilters,
-  getFilterStart,
-} from '../../../redux/FilterReducer'
+} from '../../../reducer/FilterReducer'
+import { getFilterRequest } from '../../../actions/filter'
 import { FilterButton } from '../../Atom/FilterButton'
 import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
@@ -22,9 +22,9 @@ const Filter = () => {
   const filters = useSelector(selectAllFilters)
   const hasErrorFilter = useSelector(selectHasErrorFilters)
 
-  const getFilter = useCallback(() => dispatch(getFilterStart()), [
+  const getFilter = useCallback(() => dispatch(getFilterRequest()), [
     dispatch,
-    getFilterStart,
+    getFilterRequest,
   ])
 
   useEffect(() => {

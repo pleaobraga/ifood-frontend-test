@@ -1,9 +1,5 @@
 import { takeLatest, call, put, fork } from 'redux-saga/effects'
-import {
-  getFilterSuccess,
-  getFilterError,
-  GET_FILTER,
-} from '../redux/FilterReducer'
+import { getFilterSuccess, getFilterError, types } from '../actions/filter'
 import { getFilterAPI } from '../api/Filters'
 
 function* getFilter() {
@@ -20,7 +16,7 @@ function* getFilter() {
 }
 
 function* watchGetFilterRequest() {
-  yield takeLatest(GET_FILTER, getFilter)
+  yield takeLatest(types.GET_FILTER_REQUEST, getFilter)
 }
 
 const filterSagas = [fork(watchGetFilterRequest)]

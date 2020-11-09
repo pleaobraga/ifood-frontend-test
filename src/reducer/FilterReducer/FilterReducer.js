@@ -1,8 +1,4 @@
-import {
-  GET_FILTER,
-  GET_FILTER_SUCCESS,
-  GET_FILTER_ERROR,
-} from './FilterActionsType'
+import { types } from '../../actions/filter'
 
 const initialState = {
   filters: [],
@@ -12,10 +8,10 @@ const initialState = {
 
 export const filterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_FILTER:
+    case types.GET_FILTER:
       return { ...state, isFetching: true }
 
-    case GET_FILTER_SUCCESS:
+    case types.GET_FILTER_SUCCESS:
       return {
         ...state,
         filters: action.filters,
@@ -23,7 +19,7 @@ export const filterReducer = (state = initialState, action) => {
         errorContent: null,
       }
 
-    case GET_FILTER_ERROR:
+    case types.GET_FILTER_ERROR:
       return {
         ...state,
         isFetching: false,

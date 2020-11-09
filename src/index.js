@@ -5,7 +5,7 @@ import createSagaMiddleware from 'redux-saga'
 import { Provider } from 'react-redux'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import rootSaga from './sagas'
-import rootReducers from './redux'
+import rootReducers from './reducer'
 import Routes from './routes'
 
 const composeEnhancers =
