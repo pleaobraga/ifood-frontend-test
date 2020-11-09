@@ -1,23 +1,23 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Playlist } from '.'
+import { Card } from '.'
 
-const playlist = {
+const card = {
   link: 'https://open.spotify.com/playlist/37i9dQZF1DWTMYgB8TqtmR',
   imgSrc: 'https://i.scdn.co/image/ab67706f0000000341d54d11fdbac4a1c55dc94b',
   name: 'It Hits Sweden',
 }
 
 export default storiesOf('Components | Molecule/Card', module)
-  .add('default', () => <Playlist {...playlist} />, {
+  .add('default', () => <Card {...card} />, {
     info: {
       inline: true,
       header: false,
       source: false,
-      propTables: [Playlist],
+      propTables: [Card],
       text: `
           ~~~js
-          <Playlist 
+          <Card 
             imgSrc={img} 
             link={link}
             name={name} 
@@ -29,8 +29,8 @@ export default storiesOf('Components | Molecule/Card', module)
   .add(
     'title too long',
     () => (
-      <Playlist
-        {...playlist}
+      <Card
+        {...card}
         name="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet iaculis finibus. Proin imperdiet venenatis cursus. Vestibulum ante"
       />
     ),
@@ -39,10 +39,10 @@ export default storiesOf('Components | Molecule/Card', module)
         inline: true,
         header: false,
         source: false,
-        propTables: [Playlist],
+        propTables: [Card],
         text: `
           ~~~js
-          <Playlist 
+          <Card 
             imgSrc={img} 
             link={link}
             name={name} 
@@ -52,15 +52,15 @@ export default storiesOf('Components | Molecule/Card', module)
       },
     }
   )
-  .add('no image', () => <Playlist {...playlist} imgSrc={'pp'} />, {
+  .add('no image', () => <Card {...card} imgSrc={'pp'} />, {
     info: {
       inline: true,
       header: false,
       source: false,
-      propTables: [Playlist],
+      propTables: [Card],
       text: `
           ~~~js
-          <Playlist  />
+          <Card  />
           ~~~
       `,
     },

@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 export const StyledCard = styled(Card)`
   ${({ theme }) => `
   width: 182px;
+  margin: 1rem;
 
   :hover {
     background: ${theme.palette.background.paperHover};

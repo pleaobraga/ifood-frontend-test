@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box'
 import { Image } from '../../Atom/Image'
 import { StyledCard } from './styles'
 
-const Playlist = ({ link, imgSrc, name }) => {
+const Card = ({ link, imgSrc, name }) => {
   return (
     <StyledCard>
       <CardContent
@@ -26,10 +26,10 @@ const Playlist = ({ link, imgSrc, name }) => {
   )
 }
 
-Playlist.propTypes = {
+Card.propTypes = {
   link: PropTypes.string,
   imgSrc: PropTypes.string,
   name: PropTypes.string.isRequired,
 }
 
-export default Playlist
+export default Card

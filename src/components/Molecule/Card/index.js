@@ -1,1 +1,1 @@
-export { default as Playlist } from './Card'
+export { default as Card } from './Card'
