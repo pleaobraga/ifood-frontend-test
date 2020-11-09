@@ -9,7 +9,7 @@ import Loading from './components/Atom/Loading'
 const WelcomePage = () => (
   <DynamicImport
     loadComponent={() =>
-      import(/*  webpackChunkName: "welcomePage" */ './pages/WelcomePage')
+      import(/*  webpackChunkName: "playListPage" */ './pages/PlayListPage')
     }
     ErrorComponent={ErrorPage}
     LoadingComponent={() => <Loading />}

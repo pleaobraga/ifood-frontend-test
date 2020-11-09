@@ -42,7 +42,7 @@ const AdvancedFilter = ({ formikProps, filters, isFetching, error }) => {
         wrap="wrap"
       >
         {filters.map((f) => (
-          <Grid item md={2} sm={4} xs={12} key={`grid-${f.id}`}>
+          <Grid item md={3} sm={4} xs={12} key={`grid-${f.id}`}>
             {createFormField({ fieldData: f, formikProps })}
           </Grid>
         ))}

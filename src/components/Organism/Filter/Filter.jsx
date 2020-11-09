@@ -60,7 +60,7 @@ const Filter = () => {
                 <Box className="main-filter">
                   <FormField
                     name="playListName"
-                    placeholder="Pesquise o nome da playlist"
+                    placeholder="Pesquisar nome"
                     {...formikProps}
                     inputPropsTF={{
                       startAdornment: (
