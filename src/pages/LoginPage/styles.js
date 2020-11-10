@@ -22,17 +22,17 @@ export const StyledLoginPage = styled(Box)`
 
     &__paragraph {
       margin: ${theme.spacing(2)}px;
-      font-size: 2rem;
+      font-size: 1.5rem;
       text-align: center;
 
       .important-word {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: bold;
       }
     }
 
     &__link {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
     }
   }

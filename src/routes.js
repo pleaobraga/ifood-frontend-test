@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import ErrorPage from './pages/ErrorPage'
 import Loading from './components/Atom/Loading'
 import DynamicImport from './components/UILess/DynamicImport'
+import { isLoggedIn } from './service/spotifyAuth'
 
 const PlayListPage = () => (
   <DynamicImport
@@ -29,8 +30,15 @@ const Routes = () => {
     <BrowserRouter>
       <Suspense fallback={<ErrorPage />}>
         <Switch>
-          <Route exact path="/" component={LoginPage} />
-          <Route exact path="/" component={PlayListPage} />
+          <Route exact path="/">
+            {isLoggedIn ? (
+              <Redirect to="/login" />
+            ) : (
+              <Redirect to="/playlist" />
+            )}
+          </Route>
+          <Route path="/login" component={LoginPage}></Route>
+          <Route path="/playlist" component={PlayListPage} />
           <Route component={ErrorPage} />
         </Switch>
       </Suspense>

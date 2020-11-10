@@ -15,8 +15,7 @@ class DynamicImport extends Component {
           ? this.setState({ Component: comp.default })
           : this.setState({ Component: ErrorComponent })
       })
-      .catch((e) => {
-        console.log(e)
+      .catch(() => {
         this.setState({ Component: ErrorComponent })
       })
   }
