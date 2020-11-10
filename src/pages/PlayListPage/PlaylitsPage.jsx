@@ -13,8 +13,6 @@ const PlaylitsPage = () => {
   const dispatch = useDispatch()
   const playlists = useSelector(selectAllFilteredPlaylists)
 
-  console.log('playlists', playlists)
-
   const getPlaylist = useCallback(() => dispatch(getPlaylistRequest()), [
     dispatch,
     getPlaylistRequest,
@@ -25,17 +23,23 @@ const PlaylitsPage = () => {
   }, [getPlaylist])
 
   return (
-    <StyledPlaylistPage component="main">
-      <Container  className="page__container" maxWidth="lg">
-        <Filter />
-        <Box component="section">
-          <Typography component="h1" color="textPrimary" className="page__title">
-            Playlists
-          </Typography>
-          <CardList list={playlists} />
-        </Box>
-      </Container>
-    </StyledPlaylistPage>
+    <>
+      <Filter />
+      <StyledPlaylistPage component="main">
+        <Container className="page__container" maxWidth="lg">
+          <Box component="section">
+            <Typography
+              component="h1"
+              color="textPrimary"
+              className="page__title"
+            >
+              Playlists
+            </Typography>
+            <CardList list={playlists} />
+          </Box>
+        </Container>
+      </StyledPlaylistPage>
+    </>
   )
 }
 

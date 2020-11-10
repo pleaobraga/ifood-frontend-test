@@ -7,9 +7,9 @@ export const StyledPlaylistPage = styled(Box)`
   align-items: flex-start;
   width: 100%;
   height: 100%;
+  padding-top: 100px;
 
   .page{
-
     &__title {
       font-size: 2.5rem;
       font-weight: bold;

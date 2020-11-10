@@ -1,10 +1,14 @@
 import styled from 'styled-components'
-import Box from '@material-ui/core/Box'
+import Paper from '@material-ui/core/Paper'
 
-export const StyledFilter = styled(Box)`
+export const StyledFilter = styled(Paper)`
   ${({ theme }) => `
   display: flex;
-  // margin: 0 1rem;
+  position: fixed;
+  background: ${theme.palette.background.default};
+  z-index: 2;
+  width: 100%;
+  padding-bottom: ${theme.spacing(1)}px;
 
   .filter {
     &__form {
