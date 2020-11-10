@@ -1,8 +1,6 @@
 import * as yup from 'yup'
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-
-dayjs.extend(customParseFormat)
+import isMatch from 'date-fns/isMatch'
+import { toUnicodeStandarts } from '../helpers/utils'
 
 yup.setLocale({
   number: {
@@ -11,13 +9,15 @@ yup.setLocale({
   },
 })
 
-yup.addMethod(yup.date, 'pattern', function (formats) {
+yup.addMethod(yup.date, 'pattern', function (format) {
+  const unicodeFormat = toUnicodeStandarts(format)
+
   return yup
     .string()
-    .test('pattern', `Utilize o padrão ${formats}`, function (value) {
+    .test('pattern', `Utilize o padrão ${format}`, function (value) {
       if (!value || value.length === 0) return true
 
-      return dayjs(value, formats).isValid()
+      return isMatch(value, unicodeFormat)
     })
 })
 

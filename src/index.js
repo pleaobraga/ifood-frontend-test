@@ -7,6 +7,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import rootSaga from './sagas'
 import rootReducers from './reducer'
 import Routes from './routes'
+import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -24,7 +26,9 @@ sagaMiddleware.run(rootSaga)
 ReactDOM.render(
   <Provider store={store}>
     <CssBaseline />
-    <Routes />
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Routes />
+    </MuiPickersUtilsProvider>
   </Provider>,
   document.getElementById('root')
 )

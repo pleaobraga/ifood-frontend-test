@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import { ThemeProvider } from 'styled-components'
 import theme from './theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'

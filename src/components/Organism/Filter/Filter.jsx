@@ -48,50 +48,49 @@ const Filter = () => {
   )
 
   return (
-    filters.length > 0 && (
-      <StyledFilter component="header">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          validateOnChange
-        >
-          {(formikProps) => {
-            return (
-              <Box className="filter__form" component="form">
-                <Box className="main-filter">
-                  <Typography
-                    className="brand"
-                    component="h2"
-                    color="textPrimary"
-                  >
-                    Spotifood
-                  </Typography>
-                  <FormField
-                    name="playListName"
-                    placeholder="Filtrar por nome"
-                    {...formikProps}
-                    inputPropsTF={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  {filters.length > 0 && !hasErrorFilter && (
-                    <FilterButton onClick={toggleMoreFilters} />
-                  )}
-                </Box>
-
-                {showMoreFilters && (
-                  <AdvancedFilter formikProps={formikProps} {...filtersState} />
+    <StyledFilter component="header">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        validateOnChange
+        enableReinitialize
+      >
+        {(formikProps) => {
+          return (
+            <Box className="filter__form" component="form">
+              <Box className="main-filter">
+                <Typography
+                  className="brand"
+                  component="h2"
+                  color="textPrimary"
+                >
+                  Spotifood
+                </Typography>
+                <FormField
+                  name="playListName"
+                  placeholder="Filtrar por nome"
+                  {...formikProps}
+                  inputPropsTF={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                {filters.length > 0 && !hasErrorFilter && (
+                  <FilterButton onClick={toggleMoreFilters} />
                 )}
               </Box>
-            )
-          }}
-        </Formik>
-      </StyledFilter>
-    )
+
+              {showMoreFilters && (
+                <AdvancedFilter formikProps={formikProps} {...filtersState} />
+              )}
+            </Box>
+          )
+        }}
+      </Formik>
+    </StyledFilter>
   )
 }
 

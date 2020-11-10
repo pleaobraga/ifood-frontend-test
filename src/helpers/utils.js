@@ -2,7 +2,48 @@ import React from 'react'
 import schemaValidator from './yupConfig'
 import { forIn } from 'lodash'
 import { FormField } from '../components/Molecule/FormField'
+import { DateTimeField } from '../components/Molecule/DateTimeField'
 import MenuItem from '@material-ui/core/MenuItem'
+import format from 'date-fns/format'
+
+export const toUnicodeStandarts = (format) => {
+  const regex = /T/gm
+
+  return format.replace(regex, (match) => `'${match}'`)
+}
+
+export const getType = (type) => {
+  switch (type) {
+    case 'STRING':
+      return {
+        yupType: 'string',
+        message: 'Insira caracteres válidos',
+        type: 'text',
+      }
+
+    case 'INTEGER':
+    case 'FLOAT':
+      return {
+        yupType: 'number',
+        message: 'Insira um número válido',
+        inputType: 'number',
+      }
+
+    case 'DATE_TIME':
+      return {
+        yupType: 'date',
+        message: 'Insira uma data válida',
+        type: 'datetime-local',
+      }
+
+    default:
+      return {
+        yuptype: 'mixed',
+        message: 'Insira caracteres válidos',
+        type: 'text',
+      }
+  }
+}
 
 export const createFormField = ({ fieldData = null, formikProps }) => {
   if (!fieldData) return
@@ -26,31 +67,31 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
     )
   }
 
+  const { primitiveType, entityType } = fieldData.validation
+
+  const { type } = getType(entityType || primitiveType)
+
+  if (type === 'datetime-local') {
+    return (
+      <DateTimeField
+        name={fieldData.id}
+        label={fieldData.name}
+        size="small"
+        format={toUnicodeStandarts(fieldData.validation.pattern)}
+        {...formikProps}
+      />
+    )
+  }
+
   return (
     <FormField
       name={fieldData.id}
       label={fieldData.name}
       size="small"
+      type={type}
       {...formikProps}
     />
   )
-}
-
-export const getYupType = (type) => {
-  switch (type) {
-    case 'STRING':
-      return { type: 'string', message: 'Insira caracteres válidos' }
-
-    case 'INTEGER':
-    case 'FLOAT':
-      return { type: 'number', message: 'Insira um número válido' }
-
-    case 'DATE_TIME':
-      return { type: 'date', message: 'Insira uma data válida' }
-
-    default:
-      return { type: 'mixed', message: 'Insira caracteres válidos' }
-  }
 }
 
 export const createYupFieldSchema = (schema, config) => {
@@ -63,9 +104,9 @@ export const createYupFieldSchema = (schema, config) => {
 
   const { primitiveType, entityType, ...otherValidations } = validation
 
-  const validationType = getYupType(entityType || primitiveType)
+  const validationType = getType(entityType || primitiveType)
 
-  let validator = schemaValidator[validationType.type]().typeError(
+  let validator = schemaValidator[validationType.yupType]().typeError(
     validationType.message
   )
 
@@ -89,6 +130,16 @@ export const createYupSchema = (fields) => {
 
 export const createInitialValues = (fields) => {
   return fields.reduce((initialValues, field) => {
+    if (field.validation?.entityType === 'DATE_TIME') {
+      const date = field.validation.pattern
+        ? format(new Date(), toUnicodeStandarts(field.validation.pattern))
+        : new Date()
+
+      initialValues[field.id] = date
+
+      return initialValues
+    }
+
     initialValues[field.id] = ''
     return initialValues
   }, {})
