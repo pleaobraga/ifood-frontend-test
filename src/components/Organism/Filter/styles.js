@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box'
 export const StyledFilter = styled(Box)`
   ${({ theme }) => `
   display: flex;
-  margin: 0 1rem;
+  // margin: 0 1rem;
 
   .filter {
     &__form {

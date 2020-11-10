@@ -4,6 +4,7 @@ const initialState = {
   playlists: [],
   isFetching: false,
   error: {},
+  playlistsFiltered: [],
 }
 
 export const playlistReducer = (state = initialState, action) => {
@@ -15,6 +16,7 @@ export const playlistReducer = (state = initialState, action) => {
       return {
         ...state,
         playlists: action.playlists,
+        playlistsFiltered: action.playlists,
         isFetching: false,
         errorContent: null,
       }
