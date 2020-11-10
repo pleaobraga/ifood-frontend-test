@@ -1,17 +1,23 @@
 import React, { Suspense } from 'react'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import { ThemeProvider } from 'styled-components'
-import theme from './theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import DynamicImport from './components/DynamicImport'
 import ErrorPage from './pages/ErrorPage'
 import Loading from './components/Atom/Loading'
+import DynamicImport from './components/UILess/DynamicImport'
 
-const WelcomePage = () => (
+const PlayListPage = () => (
   <DynamicImport
     loadComponent={() =>
-      import(/*  webpackChunkName: "playListPage" */ './pages/PlayListPage')
+      import(/*  webpackChunkName: "playlistPage" */ './pages/PlayListPage')
+    }
+    ErrorComponent={ErrorPage}
+    LoadingComponent={() => <Loading />}
+  />
+)
+
+const LoginPage = () => (
+  <DynamicImport
+    loadComponent={() =>
+      import(/*  webpackChunkName: "loginPage" */ './pages/LoginPage')
     }
     ErrorComponent={ErrorPage}
     LoadingComponent={() => <Loading />}
@@ -20,18 +26,15 @@ const WelcomePage = () => (
 
 const Routes = () => {
   return (
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Suspense fallback={<ErrorPage />}>
-            <Switch>
-              <Route exact path="/" component={WelcomePage} />
-              <Route component={ErrorPage} />
-            </Switch>
-          </Suspense>
-        </BrowserRouter>
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <BrowserRouter>
+      <Suspense fallback={<ErrorPage />}>
+        <Switch>
+          <Route exact path="/" component={LoginPage} />
+          <Route exact path="/" component={PlayListPage} />
+          <Route component={ErrorPage} />
+        </Switch>
+      </Suspense>
+    </BrowserRouter>
   )
 }
 
