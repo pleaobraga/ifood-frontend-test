@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { getPlaylistRequest } from '../../actions/playlist'
+import { getPlaylistRequest } from '../../redux/actions/playlist'
 import { Filter } from '../../components/Organism/Filter'
 import Container from '@material-ui/core/Container'
 

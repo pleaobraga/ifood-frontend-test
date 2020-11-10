@@ -4,8 +4,8 @@ import {
   getPlaylistError,
   types,
 } from '../actions/playlist'
-import { getPlaylistAPI } from '../api/playlist'
-import { getToken } from '../service/spotifyAuth'
+import { getPlaylistAPI } from '../../api/playlist'
+import { getToken } from '../../service/spotifyAuth'
 
 function* getPlaylist() {
   try {

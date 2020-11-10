@@ -5,8 +5,8 @@ import {
   selectFilters,
   selectAllFilters,
   selectHasErrorFilters,
-} from '../../../reducer/FilterReducer'
-import { getFilterRequest } from '../../../actions/filter'
+} from '../../../redux/reducer/FilterReducer'
+import { getFilterRequest } from '../../../redux/actions/filter'
 import { FilterButton } from '../../Atom/FilterButton'
 import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
