@@ -54,7 +54,6 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
         name={fieldData.id}
         label={fieldData.name}
         select={true}
-        size="small"
         {...formikProps}
       >
         <MenuItem value={''} />
@@ -76,7 +75,6 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
       <DateTimeField
         name={fieldData.id}
         label={fieldData.name}
-        size="small"
         format={toUnicodeStandarts(fieldData.validation.pattern)}
         {...formikProps}
       />
@@ -87,7 +85,6 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
     <FormField
       name={fieldData.id}
       label={fieldData.name}
-      size="small"
       type={type}
       {...formikProps}
     />
