@@ -1,6 +1,6 @@
 import { takeLatest, call, put, fork } from 'redux-saga/effects'
 import { getFilterSuccess, getFilterError, types } from '../actions/filter'
-import { getFilterAPI } from '../api/Filters'
+import { getFilterAPI } from '../api/filters'
 
 function* getFilter() {
   try {

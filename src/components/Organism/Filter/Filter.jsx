@@ -13,7 +13,7 @@ import { AdvancedFilter } from '../AdvancedFilter'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
 import Box from '@material-ui/core/Box'
-import { createYupSchema, createInitialValues } from '../../../helpers/utils'
+import { createYupSchema, createInitialValues } from '../../../helpers/formHelper'
 import { StyledFilter } from './styles'
 import { Typography } from '@material-ui/core'
 

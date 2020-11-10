@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux'
-import content from './ContentReducer'
 import { filterReducer } from './FilterReducer'
+import { playlistReducer } from './PlaylistReducer'
 
-export default combineReducers({ content, filter: filterReducer })
+export default combineReducers({
+  filter: filterReducer,
+  playlist: playlistReducer,
+})

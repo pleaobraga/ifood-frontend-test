@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box'
 import { isEmpty } from 'lodash'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { createFormField } from '../../../helpers/utils'
+import { createFormField } from '../../../helpers/formHelper'
 import { StyledAdvancedFilter } from './styles'
 
 const AdvancedFilter = ({ formikProps, filters, isFetching, error }) => {

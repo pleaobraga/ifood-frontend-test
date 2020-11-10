@@ -1,16 +1,49 @@
-const SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize'
+import addSeconds from 'date-fns/addSeconds'
+import formatISO from 'date-fns/formatISO'
+import compareAsc from 'date-fns/compareAsc'
 
-export const spotifyURLAuth = `${SPOTIFY_AUTH_URL}?response_type=code&client_id=${process.env.APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.APP_SPOTIFY_REDIRECT_URI}`
+const SPOTIFY_TOKEN_API = 'https://accounts.spotify.com/api/token'
 
-export const saveSpotifyToken = (token) => {
-  localStorage.setItem('spotify_token', token)
+const auth = btoa(
+  `${process.env.APP_SPOTIFY_CLIENT_ID}:${process.env.APP_SPOTIFY_CLIENT_SECRET}`
+)
+
+const options = {
+  method: 'POST',
+  headers: new Headers({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: `Basic ${auth}`,
+  }),
+  body: 'grant_type=client_credentials',
 }
 
-export const getTokenSpotifyToken = () => {
-  const token = localStorage.getItem('spotify_token')
-  return token || ''
+export const isTokenValid = () => {
+  const tokenExpiration = localStorage.getItem('spotify_token_expiration')
+
+  if (!tokenExpiration) {
+    return false
+  }
+
+  return compareAsc(new Date(tokenExpiration), new Date()) === 1
 }
 
-export const isLoggedIn = () => {
-  return getTokenSpotifyToken !== ''
+export const getToken = async () => {
+  if (isTokenValid()) {
+    return localStorage.getItem('spotify_token')
+  }
+
+  try {
+    const response = await fetch(SPOTIFY_TOKEN_API, options)
+
+    const { expires_in, access_token } = await response.json()
+
+    const expireDate = addSeconds(new Date(), expires_in)
+
+    localStorage.setItem('spotify_token_expiration', formatISO(expireDate))
+    localStorage.setItem('spotify_token', access_token)
+
+    return access_token
+  } catch (e) {
+    return e
+  }
 }
