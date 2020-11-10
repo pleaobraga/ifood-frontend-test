@@ -10,9 +10,7 @@ import { getToken } from '../service/spotifyAuth'
 function* getPlaylist() {
   try {
     const token = yield getToken()
-    debugger
     const response = yield call(getPlaylistAPI, { token })
-    console.log('response', response)
     yield put(getPlaylistSuccess({ playlists: response.data.playlists.items }))
   } catch (e) {
     yield put(
