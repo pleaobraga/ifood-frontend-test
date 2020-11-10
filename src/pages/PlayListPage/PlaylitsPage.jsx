@@ -35,7 +35,7 @@ const PlaylitsPage = () => {
             >
               Playlists
             </Typography>
-            <CardList list={playlists} />
+            <CardList list={playlists} className="page__card-list" />
           </Box>
         </Container>
       </StyledPlaylistPage>

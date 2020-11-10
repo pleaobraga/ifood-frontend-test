@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Card } from '../../Molecule/Card'
 import { StyledCardList } from './styles'
 
-const CardList = ({ list }) => {
+const CardList = ({ list, className }) => {
   return (
-    <StyledCardList>
+    <StyledCardList className={className}>
       {list.map(({ external_urls, id, name, images }) => {
         return (
           <Card
@@ -21,6 +21,7 @@ const CardList = ({ list }) => {
 }
 
 CardList.propTypes = {
+  className: PropTypes.string,
   list: PropTypes.arrayOf(
     PropTypes.shape({
       external_urls: PropTypes.shape({
@@ -39,6 +40,7 @@ CardList.propTypes = {
 
 CardList.defaultProps = {
   list: [],
+  className: '',
 }
 
 export default CardList

@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card'
 
 export const StyledCard = styled(Card)`
   ${({ theme }) => `
-  width: 182px;
+  width: 230px;
   margin: 0.5rem 1rem 0.5rem 0;
 
   :hover {
@@ -18,8 +18,8 @@ export const StyledCard = styled(Card)`
     }
 
     &__image {
-      width: 150px;
-      height: 150px;
+      width: 200px;
+      height: 200px;
     }
 
     &__title {
