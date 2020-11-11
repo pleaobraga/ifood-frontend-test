@@ -1,24 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { isEmpty } from 'lodash'
 import { Card } from '../../Molecule/Card'
-import {
-  selectAllFilteredPlaylists,
-  selectIsFetchingPlaylists,
-} from '../../../redux/reducer/PlaylistReducer'
 import Typography from '@material-ui/core/Typography'
 import Loading from '../../Atom/Loading'
-
 import { StyledPlaylistsCard } from './styles'
 
-const PlaylistsCard = ({ className }) => {
-  const playlists = useSelector(selectAllFilteredPlaylists)
-  const isFetching = useSelector(selectIsFetchingPlaylists)
-  const hasError = useSelector(selectIsFetchingPlaylists)
-
+const PlaylistsCard = ({
+  className,
+  playlistsFiltered,
+  isFetching,
+  hasError,
+}) => {
   if (isFetching) return <Loading />
 
-  if (hasError) {
+  if (!isEmpty(hasError)) {
     return (
       <Typography color="textPrimary">
         Houve um erro ao apresentar o resultado, confira os filtros e tente
@@ -27,11 +23,11 @@ const PlaylistsCard = ({ className }) => {
     )
   }
 
-  return playlists.length === 0 ? (
+  return playlistsFiltered.length === 0 ? (
     <Typography color="textPrimary">Nenhum item a ser exibido.</Typography>
   ) : (
     <StyledPlaylistsCard className={className}>
-      {playlists.map(({ external_urls, id, name, images }) => {
+      {playlistsFiltered.map(({ external_urls, id, name, images }) => {
         return (
           <Card
             key={id}
@@ -47,6 +43,9 @@ const PlaylistsCard = ({ className }) => {
 
 PlaylistsCard.propTypes = {
   className: PropTypes.string,
+  playlistsFiltered: PropTypes.array,
+  isFetching: PropTypes.bool,
+  hasError: PropTypes.object,
 }
 
 PlaylistsCard.defaultProps = {

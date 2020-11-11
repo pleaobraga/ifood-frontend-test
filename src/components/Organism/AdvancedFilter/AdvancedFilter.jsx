@@ -1,19 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import { isEmpty } from 'lodash'
 import Typography from '@material-ui/core/Typography'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Loading from '../../Atom/Loading'
 import { createFormField } from '../../../helpers/formHelper'
+import { useDebounce } from '../../../helpers/debounce'
 import { StyledAdvancedFilter } from './styles'
 
-const AdvancedFilter = ({ formikProps, filters, isFetching, error }) => {
+const AdvancedFilter = ({
+  formikProps,
+  filters,
+  isFetching,
+  error,
+  onValuesChange,
+}) => {
+  const debouncedFilters = useDebounce(formikProps.values, 500)
+
+  useEffect(() => {
+    console.log('values', formikProps.values)
+    onValuesChange(formikProps)
+  }, [debouncedFilters])
+
   const renderFilters = () => {
     if (isFetching) {
       return (
         <Box paddingTop={2}>
-          <CircularProgress />
+          <Loading />
         </Box>
       )
     }
@@ -26,15 +40,9 @@ const AdvancedFilter = ({ formikProps, filters, isFetching, error }) => {
       )
     }
 
-    if (filters.length === 0) {
-      return (
-        <Typography color="textPrimary">
-          Não existem filtros avançados
-        </Typography>
-      )
-    }
-
-    return (
+    return filters.length === 0 ? (
+      <Typography color="textPrimary">Não existem filtros avançados</Typography>
+    ) : (
       <Grid
         container
         spacing={2}
@@ -65,6 +73,7 @@ const AdvancedFilter = ({ formikProps, filters, isFetching, error }) => {
 }
 
 AdvancedFilter.propTypes = {
+  onValuesChange: PropTypes.func,
   formikProps: PropTypes.object.isRequired,
   filters: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,

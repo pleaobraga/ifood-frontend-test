@@ -1,10 +1,8 @@
-import { takeEvery, call, put, fork } from 'redux-saga/effects'
+import { takeLatest, call, put, fork } from 'redux-saga/effects'
 import {
   types,
   getPlaylistSuccess,
   getPlaylistError,
-  postFilterLocalPlaylistSuccess,
-  postFilterLocalPlaylistError,
 } from '../actions/playlist'
 import { getPlaylistAPI } from '../../api/playlist'
 import { getToken } from '../../service/spotifyAuth'
@@ -24,7 +22,7 @@ function* getPlaylist() {
 }
 
 function* watchGetPlaylistRequest() {
-  yield takeEvery(types.GET_PLAYLIST_REQUEST, getPlaylist)
+  yield takeLatest(types.GET_PLAYLIST_REQUEST, getPlaylist)
 }
 
 // function* filterLocalPlaylist(filter) {

@@ -73,10 +73,10 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
   if (type === 'datetime-local') {
     return (
       <DateTimeField
+        {...formikProps}
         name={fieldData.id}
         label={fieldData.name}
         format={toUnicodeStandarts(fieldData.validation.pattern)}
-        {...formikProps}
       />
     )
   }

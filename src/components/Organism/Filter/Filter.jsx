@@ -21,7 +21,7 @@ import { SearchBar } from '../../Molecule/SearchBar'
 import { StyledFilter } from './styles'
 import { Typography } from '@material-ui/core'
 
-const Filter = ({ onSearchBarChange }) => {
+const Filter = ({ onSearchBarChange, onFiltersChange }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
   const filtersState = useSelector(selectFilters)
   const filters = useSelector(selectAllFilters)
@@ -80,6 +80,7 @@ const Filter = ({ onSearchBarChange }) => {
                   {showMoreFilters && (
                     <AdvancedFilter
                       formikProps={formikProps}
+                      onValuesChange={onFiltersChange}
                       {...filtersState}
                     />
                   )}
@@ -95,6 +96,7 @@ const Filter = ({ onSearchBarChange }) => {
 
 Filter.propTypes = {
   onSearchBarChange: PropTypes.func,
+  onFiltersChange: PropTypes.func,
 }
 
 export default Filter

@@ -1,5 +1,13 @@
-import { useLocation } from 'react-router-dom'
+import { forIn } from 'lodash'
 
-export const useQuery = () => {
-  return new URLSearchParams(useLocation().search)
+export const createQueryParams = (filters) => {
+  const params = []
+
+  forIn(filters, (value, key) => {
+    if (value !== '') {
+      params.push(`${key}=${encodeURIComponent(value)}`)
+    }
+  })
+
+  return '?' + params.join('&')
 }

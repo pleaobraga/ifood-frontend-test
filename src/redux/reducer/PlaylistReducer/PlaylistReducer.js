@@ -5,6 +5,7 @@ const initialState = {
   isFetching: false,
   error: {},
   playlistsFiltered: [],
+  filter: '',
 }
 
 export const playlistReducer = (state = initialState, action) => {
@@ -35,6 +36,7 @@ export const playlistReducer = (state = initialState, action) => {
       return {
         ...state,
         playlistsFiltered: newList,
+        filter: action.filter,
       }
     }
 
