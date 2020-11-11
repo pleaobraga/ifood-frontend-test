@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { has, get } from 'lodash'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
+import { format as formatTest } from 'date-fns'
 
 const DateTimeField = (props) => {
   const {
@@ -24,6 +25,12 @@ const DateTimeField = (props) => {
     setFieldTouched(name, true)
   }
 
+  const formatDefaultData = (date) => {
+    if (!date) return ''
+
+    return formatTest(new Date(date), 'dd/MM/yyyy HH:mm')
+  }
+
   return (
     <KeyboardDateTimePicker
       className={className}
@@ -39,6 +46,7 @@ const DateTimeField = (props) => {
       format={format}
       size={size}
       ampm={false}
+      labelFunc={formatDefaultData}
       fullWidth
     />
   )
