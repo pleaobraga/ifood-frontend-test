@@ -33,12 +33,15 @@ const FormField = (props) => {
       error={has(errors, name)}
       margin="normal"
       variant="outlined"
-      inputProps={{ type: type }}
-      InputProps={{ ...inputPropsTF }}
       select={select}
       placeholder={placeholder}
       size={size}
       fullWidth
+      inputProps={{ type: type }}
+      InputProps={{ ...inputPropsTF }}
+      SelectProps={{
+        MenuProps: { disablePortal: true },
+      }}
     >
       {props.children}
     </TextField>

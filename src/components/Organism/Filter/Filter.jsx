@@ -20,6 +20,7 @@ import {
 } from '../../../helpers/formHelper'
 import { StyledFilter } from './styles'
 import { Typography } from '@material-ui/core'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 const Filter = () => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
@@ -51,52 +52,63 @@ const Filter = () => {
     [filters, createInitialValues]
   )
 
+  const handleClickAway = () => {
+    if (showMoreFilters) {
+      setShowMoreFilters(false)
+    }
+  }
+
   return (
-    <StyledFilter component="header">
-      <Container maxWidth="lg">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          validateOnChange
-          enableReinitialize
-        >
-          {(formikProps) => {
-            return (
-              <Box className="filter__form" component="form">
-                <Box className="main-filter">
-                  <Typography
-                    className="brand"
-                    component="h2"
-                    color="textPrimary"
-                  >
-                    Spotifood
-                  </Typography>
-                  <FormField
-                    name="playListName"
-                    placeholder="Filtrar por nome"
-                    {...formikProps}
-                    inputPropsTF={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  {filters.length > 0 && !hasErrorFilter && (
-                    <FilterButton onClick={toggleMoreFilters} />
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <StyledFilter component="header">
+        <Container maxWidth="lg">
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            validateOnChange
+            enableReinitialize
+          >
+            {(formikProps) => {
+              return (
+                <Box className="filter__form" component="form">
+                  <Box className="main-filter">
+                    <Typography
+                      className="brand"
+                      component="h2"
+                      color="textPrimary"
+                    >
+                      Spotifood
+                    </Typography>
+                    <FormField
+                      name="playListName"
+                      placeholder="Filtrar por nome"
+                      {...formikProps}
+                      inputPropsTF={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    {filters.length > 0 && !hasErrorFilter && (
+                      <FilterButton onClick={toggleMoreFilters} />
+                    )}
+                  </Box>
+
+                  {showMoreFilters && (
+                    <AdvancedFilter
+                      formikProps={formikProps}
+                      {...filtersState}
+                    />
                   )}
                 </Box>
-
-                {showMoreFilters && (
-                  <AdvancedFilter formikProps={formikProps} {...filtersState} />
-                )}
-              </Box>
-            )
-          }}
-        </Formik>
-      </Container>
-    </StyledFilter>
+              )
+            }}
+          </Formik>
+        </Container>
+      </StyledFilter>
+    </ClickAwayListener>
   )
 }
 
