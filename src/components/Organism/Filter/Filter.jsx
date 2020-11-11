@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import {
@@ -18,10 +19,10 @@ import {
   createYupSchema,
   createInitialValues,
 } from '../../../helpers/formHelper'
-import { StyledHeader } from './styles'
+import { StyledFilter } from './styles'
 import { Typography } from '@material-ui/core'
 
-const Header = () => {
+const Filter = ({ onBarInputChange }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
   const filtersState = useSelector(selectFilters)
   const filters = useSelector(selectAllFilters)
@@ -37,7 +38,7 @@ const Header = () => {
   ])
 
   const initialValues = useMemo(
-    () => createInitialValues([...filters, { id: 'playListName' }]),
+    () => createInitialValues([...filters, { id: 'filterBar' }]),
     [filters, createInitialValues]
   )
 
@@ -49,7 +50,7 @@ const Header = () => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <StyledHeader component="header">
+      <StyledFilter component="header">
         <Container maxWidth="lg">
           <Formik
             initialValues={initialValues}
@@ -58,6 +59,11 @@ const Header = () => {
             enableReinitialize
           >
             {(formikProps) => {
+              const onFilterBarChange = (event) => {
+                onBarInputChange(event.target.value)
+                formikProps.handleChange(event)
+              }
+
               return (
                 <Box className="filter__form" component="form">
                   <Box className="main-filter">
@@ -69,9 +75,10 @@ const Header = () => {
                       Spotifood
                     </Typography>
                     <FormField
-                      name="playListName"
+                      name="filterBar"
                       placeholder="Filtrar por nome"
                       {...formikProps}
+                      handleChange={onFilterBarChange}
                       inputPropsTF={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -96,9 +103,13 @@ const Header = () => {
             }}
           </Formik>
         </Container>
-      </StyledHeader>
+      </StyledFilter>
     </ClickAwayListener>
   )
 }
 
-export default Header
+Filter.propTypes = {
+  onBarInputChange: PropTypes.func,
+}
+
+export default Filter

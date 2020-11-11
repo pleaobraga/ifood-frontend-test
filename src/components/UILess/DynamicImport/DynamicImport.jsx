@@ -9,15 +9,19 @@ class DynamicImport extends Component {
   componentDidMount() {
     const { loadComponent, ErrorComponent } = this.props
 
-    loadComponent()
-      .then((comp) => {
-        comp.default
-          ? this.setState({ Component: comp.default })
-          : this.setState({ Component: ErrorComponent })
-      })
-      .catch(() => {
-        this.setState({ Component: ErrorComponent })
-      })
+    try {
+      loadComponent()
+        .then((comp) => {
+          comp.default
+            ? this.setState({ Component: comp.default })
+            : this.setState({ Component: ErrorComponent })
+        })
+        .catch(() => {
+          this.setState({ Component: ErrorComponent })
+        })
+    } catch {
+      this.setState({ Component: ErrorComponent })
+    }
   }
 
   render() {

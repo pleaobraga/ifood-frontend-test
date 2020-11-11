@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Paper from '@material-ui/core/Paper'
 
-export const StyledHeader = styled(Paper)`
+export const StyledFilter = styled(Paper)`
   ${({ theme }) => `
   display: flex;
   position: fixed;

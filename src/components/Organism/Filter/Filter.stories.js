@@ -1,16 +1,16 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Header } from '.'
+import { Filter } from '.'
 
-export default storiesOf('Components | Organism/Header', module).add(
+export default storiesOf('Components | Organism/Filter', module).add(
   'default',
-  () => <Header />,
+  () => <Filter />,
   {
     info: {
       inline: true,
       header: false,
       source: false,
-      propTables: [Header],
+      propTables: [Filter],
       text: `
           ~~~js
           <Filter />

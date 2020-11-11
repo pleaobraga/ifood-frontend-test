@@ -1,8 +1,10 @@
 import { takeEvery, call, put, fork } from 'redux-saga/effects'
 import {
+  types,
   getPlaylistSuccess,
   getPlaylistError,
-  types,
+  postFilterLocalPlaylistSuccess,
+  postFilterLocalPlaylistError,
 } from '../actions/playlist'
 import { getPlaylistAPI } from '../../api/playlist'
 import { getToken } from '../../service/spotifyAuth'
@@ -25,6 +27,30 @@ function* watchGetPlaylistRequest() {
   yield takeEvery(types.GET_PLAYLIST_REQUEST, getPlaylist)
 }
 
-const playlistSagas = [fork(watchGetPlaylistRequest)]
+// function* filterLocalPlaylist(filter) {
+//   try {
+
+//     yield put(
+//       postFilterLocalPlaylistSuccess({
+//         playlists:
+//       })
+//     )
+//   } catch (e) {
+//     yield put(
+//       getPlaylistError({
+//         error: 'An error occurred when trying to get the Playlist',
+//       })
+//     )
+//   }
+// }
+
+// function* watchFilterLocalPlaylist() {
+//   yield takeEvery(types.FILTER_LOCAL_PLAYLIST, filterLocalPlaylist)
+// }
+
+const playlistSagas = [
+  fork(watchGetPlaylistRequest),
+  // fork(watchFilterLocalPlaylist),
+]
 
 export default playlistSagas

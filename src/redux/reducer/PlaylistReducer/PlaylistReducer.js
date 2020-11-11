@@ -21,6 +21,17 @@ export const playlistReducer = (state = initialState, action) => {
         errorContent: null,
       }
 
+    case types.FILTER_PLAYLIST: {
+      const newList = state.playlists.filter(({ name }) =>
+        name.toUpperCase().includes(action.filter.toUpperCase())
+      )
+
+      return {
+        ...state,
+        playlistsFiltered: newList,
+      }
+    }
+
     case types.GET_PLAYLIST_ERROR:
       return {
         ...state,
