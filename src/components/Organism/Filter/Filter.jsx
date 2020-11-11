@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
@@ -8,10 +9,7 @@ import {
   selectHasErrorFilters,
 } from '../../../redux/reducer/FilterReducer'
 import { FilterButton } from '../../Atom/FilterButton'
-import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import SearchIcon from '@material-ui/icons/Search'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
@@ -19,10 +17,11 @@ import {
   createYupSchema,
   createInitialValues,
 } from '../../../helpers/formHelper'
+import { SearchBar } from '../../Molecule/SearchBar'
 import { StyledFilter } from './styles'
 import { Typography } from '@material-ui/core'
 
-const Filter = ({ onBarInputChange }) => {
+const Filter = ({ onSearchBarChange }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
   const filtersState = useSelector(selectFilters)
   const filters = useSelector(selectAllFilters)
@@ -38,7 +37,7 @@ const Filter = ({ onBarInputChange }) => {
   ])
 
   const initialValues = useMemo(
-    () => createInitialValues([...filters, { id: 'filterBar' }]),
+    () => createInitialValues([...filters, { id: 'searchBar' }]),
     [filters, createInitialValues]
   )
 
@@ -59,11 +58,6 @@ const Filter = ({ onBarInputChange }) => {
             enableReinitialize
           >
             {(formikProps) => {
-              const onFilterBarChange = (event) => {
-                onBarInputChange(event.target.value)
-                formikProps.handleChange(event)
-              }
-
               return (
                 <Box className="filter__form" component="form">
                   <Box className="main-filter">
@@ -74,18 +68,9 @@ const Filter = ({ onBarInputChange }) => {
                     >
                       Spotifood
                     </Typography>
-                    <FormField
-                      name="filterBar"
-                      placeholder="Filtrar por nome"
-                      {...formikProps}
-                      handleChange={onFilterBarChange}
-                      inputPropsTF={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <SearchIcon />
-                          </InputAdornment>
-                        ),
-                      }}
+                    <SearchBar
+                      formikProps={formikProps}
+                      onSearchBarChange={onSearchBarChange}
                     />
                     {filters.length > 0 && !hasErrorFilter && (
                       <FilterButton onClick={toggleMoreFilters} />
@@ -109,7 +94,7 @@ const Filter = ({ onBarInputChange }) => {
 }
 
 Filter.propTypes = {
-  onBarInputChange: PropTypes.func,
+  onSearchBarChange: PropTypes.func,
 }
 
 export default Filter

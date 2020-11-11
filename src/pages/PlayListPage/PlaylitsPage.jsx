@@ -15,7 +15,7 @@ import {
 const PlaylitsPage = () => {
   const dispatch = useDispatch()
 
-  const onBarInputChange = (filter) => {
+  const onSearchBarChange = (filter) => {
     dispatch(filterPlaylist({ filter }))
   }
 
@@ -39,7 +39,7 @@ const PlaylitsPage = () => {
 
   return (
     <>
-      <Filter onBarInputChange={onBarInputChange} />
+      <Filter onSearchBarChange={onSearchBarChange} />
       <StyledPlaylistPage component="main">
         <Container className="page__container" maxWidth="lg">
           <Box component="section">

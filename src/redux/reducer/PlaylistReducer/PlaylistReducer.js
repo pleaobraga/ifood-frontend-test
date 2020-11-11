@@ -22,9 +22,15 @@ export const playlistReducer = (state = initialState, action) => {
       }
 
     case types.FILTER_PLAYLIST: {
-      const newList = state.playlists.filter(({ name }) =>
-        name.toUpperCase().includes(action.filter.toUpperCase())
-      )
+      let newList
+
+      if (action.filter === '') {
+        newList = state.playlists
+      } else {
+        newList = state.playlists.filter(({ name }) =>
+          name.toUpperCase().includes(action.filter.toUpperCase())
+        )
+      }
 
       return {
         ...state,
