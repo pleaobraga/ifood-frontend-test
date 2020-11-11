@@ -38,6 +38,7 @@ const DateTimeField = (props) => {
       inputVariant="outlined"
       format={format}
       size={size}
+      ampm={false}
       fullWidth
     />
   )

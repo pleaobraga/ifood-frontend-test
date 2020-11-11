@@ -4,8 +4,8 @@ import { toUnicodeStandarts } from './formHelper'
 
 yup.setLocale({
   number: {
-    min: 'Número Deve ser maior que ${min}',
-    max: 'Número Deve ser menor que ${max}',
+    min: 'Número deve ser maior que ${min}',
+    max: 'Número deve ser menor que ${max}',
   },
 })
 

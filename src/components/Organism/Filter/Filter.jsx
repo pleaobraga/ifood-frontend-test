@@ -75,7 +75,7 @@ const Filter = () => {
                     <Typography
                       className="brand"
                       component="h2"
-                      color="textPrimary"
+                      color="primary"
                     >
                       Spotifood
                     </Typography>
