@@ -5,13 +5,15 @@ export const types = {
   FILTER_PLAYLIST: 'playlist/filter_playlist',
 }
 
-export const getPlaylistRequest = () => ({
+export const getPlaylistRequest = ({ filter }) => ({
   type: types.GET_PLAYLIST_REQUEST,
+  filter,
 })
 
-export const getPlaylistSuccess = ({ playlists }) => ({
+export const getPlaylistSuccess = ({ playlists, filter }) => ({
   type: types.GET_PLAYLIST_SUCCESS,
   playlists,
+  filter,
 })
 
 export const getPlaylistError = (error) => ({

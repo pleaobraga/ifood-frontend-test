@@ -9,5 +9,5 @@ export const createQueryParams = (filters) => {
     }
   })
 
-  return '?' + params.join('&')
+  return params.length > 0 ? '?' + params.join('&') : ''
 }

@@ -5,4 +5,5 @@ export {
   selectPlaylists,
   selectIsFetchingPlaylists,
   selectAllFilteredPlaylists,
+  selectApiFilter,
 } from './PlaylistSelector'

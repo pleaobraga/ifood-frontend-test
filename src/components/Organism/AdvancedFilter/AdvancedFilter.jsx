@@ -16,10 +16,9 @@ const AdvancedFilter = ({
   error,
   onValuesChange,
 }) => {
-  const debouncedFilters = useDebounce(formikProps.values, 500)
+  const debouncedFilters = useDebounce(formikProps.values, 150)
 
   useEffect(() => {
-    console.log('values', formikProps.values)
     onValuesChange(formikProps)
   }, [debouncedFilters])
 
@@ -43,12 +42,7 @@ const AdvancedFilter = ({
     return filters.length === 0 ? (
       <Typography color="textPrimary">Não existem filtros avançados</Typography>
     ) : (
-      <Grid
-        container
-        spacing={2}
-        className="dvanced-filter__container"
-        wrap="wrap"
-      >
+      <Grid container spacing={2} wrap="wrap">
         {filters.map((f) => (
           <Grid item md={3} sm={4} xs={12} key={`grid-${f.id}`}>
             {createFormField({ fieldData: f, formikProps })}

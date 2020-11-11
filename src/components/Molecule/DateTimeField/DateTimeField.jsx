@@ -29,7 +29,7 @@ const DateTimeField = (props) => {
       className={className}
       label={label}
       name={name}
-      value={get(values, name)}
+      value={get(values, name) || null}
       onChange={handleChange}
       onBlur={handleBlur}
       helperText={has(errors, name) && get(errors, name)}

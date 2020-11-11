@@ -5,7 +5,8 @@ const initialState = {
   isFetching: false,
   error: {},
   playlistsFiltered: [],
-  filter: '',
+  localFilter: '',
+  apiFilter: '',
 }
 
 export const playlistReducer = (state = initialState, action) => {
@@ -18,6 +19,7 @@ export const playlistReducer = (state = initialState, action) => {
         ...state,
         playlists: action.playlists,
         playlistsFiltered: action.playlists,
+        apiFilter: action.filter,
         isFetching: false,
         errorContent: null,
       }
@@ -36,7 +38,7 @@ export const playlistReducer = (state = initialState, action) => {
       return {
         ...state,
         playlistsFiltered: newList,
-        filter: action.filter,
+        localFilter: action.filter,
       }
     }
 

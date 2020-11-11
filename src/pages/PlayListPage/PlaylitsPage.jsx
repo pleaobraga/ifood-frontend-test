@@ -11,13 +11,17 @@ import {
   getPlaylistRequest,
   filterPlaylist,
 } from '../../redux/actions/playlist'
-import { selectPlaylists } from '../../redux/reducer/PlaylistReducer'
+import {
+  selectPlaylists,
+  selectApiFilter,
+} from '../../redux/reducer/PlaylistReducer'
 import { createQueryParams } from '../../helpers/urlHelper'
 import { StyledPlaylistPage } from './styles'
 
 const PlaylitsPage = () => {
   const dispatch = useDispatch()
   const playlistState = useSelector(selectPlaylists)
+  const apiFilter = useSelector(selectApiFilter)
 
   const onSearchBarChange = (filter) => {
     dispatch(filterPlaylist({ filter }))
@@ -26,7 +30,7 @@ const PlaylitsPage = () => {
   const onFiltersChange = ({ values, errors }) => {
     if (isEmpty(errors)) {
       const filter = createQueryParams(values)
-      dispatch(getPlaylistRequest({ filter }))
+      filter !== apiFilter && dispatch(getPlaylistRequest({ filter }))
     }
   }
 
@@ -39,10 +43,10 @@ const PlaylitsPage = () => {
     getFilter()
   }, [getFilter])
 
-  const getPlaylist = useCallback(() => dispatch(getPlaylistRequest()), [
-    dispatch,
-    getPlaylistRequest,
-  ])
+  const getPlaylist = useCallback(
+    () => dispatch(getPlaylistRequest({ filter: '' })),
+    [dispatch, getPlaylistRequest]
+  )
 
   useEffect(() => {
     getPlaylist()

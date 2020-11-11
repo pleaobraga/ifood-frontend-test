@@ -4,7 +4,6 @@ import { forIn } from 'lodash'
 import { FormField } from '../components/Molecule/FormField'
 import { DateTimeField } from '../components/Molecule/DateTimeField'
 import MenuItem from '@material-ui/core/MenuItem'
-import format from 'date-fns/format'
 
 export const toUnicodeStandarts = (format) => {
   const regex = /T/gm
@@ -127,16 +126,6 @@ export const createYupSchema = (fields) => {
 
 export const createInitialValues = (fields) => {
   return fields.reduce((initialValues, field) => {
-    if (field.validation?.entityType === 'DATE_TIME') {
-      const date = field.validation.pattern
-        ? format(new Date(), toUnicodeStandarts(field.validation.pattern))
-        : new Date()
-
-      initialValues[field.id] = date
-
-      return initialValues
-    }
-
     initialValues[field.id] = ''
     return initialValues
   }, {})

@@ -1,6 +1,8 @@
 import { isEmpty } from 'lodash'
 
 export const selectPlaylists = (state) => state.playlist
+export const selectApiFilter = (state) => state.playlist.apiFilter
+export const selectLocalFilter = (state) => state.playlist.localFilter
 export const selectAllPlaylists = (state) => state.playlist.playlists
 export const selectAllFilteredPlaylists = (state) =>
   state.playlist.playlistsFiltered
