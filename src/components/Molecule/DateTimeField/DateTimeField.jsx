@@ -4,6 +4,9 @@ import { has, get } from 'lodash'
 //import { KeyboardDateTimePicker } from '@material-ui/pickers'
 import { format as formatDefault, isValid } from 'date-fns'
 import { DateTimePicker } from '@material-ui/pickers'
+import IconButton from '@material-ui/core/IconButton'
+import Event from '@material-ui/icons/Event'
+import Close from '@material-ui/icons/Close'
 
 const DateTimeField = (props) => {
   const {
@@ -22,6 +25,12 @@ const DateTimeField = (props) => {
     setFieldValue(name, formatDefault(date, format) || '')
   }
 
+  const handleClear = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    setFieldValue(name, '')
+  }
+
   const handleBlur = () => {
     setFieldTouched(name, true)
   }
@@ -34,6 +43,7 @@ const DateTimeField = (props) => {
 
   return (
     <DateTimePicker
+      clearable
       allowKeyboardControl
       className={className}
       label={label}
@@ -49,6 +59,13 @@ const DateTimeField = (props) => {
       ampm={false}
       labelFunc={formatDefaultData}
       fullWidth
+      InputProps={{
+        startAdornment: (
+          <IconButton onClick={handleClear} style={{ order: 1 }}>
+            <Close color="disabled" fontSize="small" />
+          </IconButton>
+        ),
+      }}
     />
   )
 }
