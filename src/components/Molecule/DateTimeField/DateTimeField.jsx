@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { has, get } from 'lodash'
-//import { KeyboardDateTimePicker } from '@material-ui/pickers'
 import { format as formatDefault, isValid } from 'date-fns'
 import { DateTimePicker } from '@material-ui/pickers'
 import IconButton from '@material-ui/core/IconButton'
-import Event from '@material-ui/icons/Event'
 import Close from '@material-ui/icons/Close'
 
 const DateTimeField = (props) => {
@@ -19,6 +17,8 @@ const DateTimeField = (props) => {
     setFieldTouched,
     format,
     size,
+    disabled,
+    userDateFormat,
   } = props
 
   const handleChange = (date) => {
@@ -38,12 +38,12 @@ const DateTimeField = (props) => {
   const formatDefaultData = (date) => {
     if (!isValid(date)) return ''
 
-    return formatDefault(new Date(date), 'dd/MM/yyyy HH:mm')
+    return formatDefault(new Date(date), userDateFormat)
   }
 
   return (
     <DateTimePicker
-      clearable
+      disabled={disabled}
       allowKeyboardControl
       className={className}
       label={label}
@@ -75,24 +75,20 @@ DateTimeField.propTypes = {
   name: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
-  touched: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired,
-  children: PropTypes.node,
   className: PropTypes.string,
   format: PropTypes.string,
   setFieldValue: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
   size: PropTypes.string,
+  disabled: PropTypes.bool,
+  userDateFormat: PropTypes.string,
 }
 
 DateTimeField.defaultProps = {
-  type: 'text',
-  select: false,
   className: '',
-  onClick: () => {},
-  inputPropsTF: {},
   disabled: false,
-  format: 'DD/MM/YYYY HH:mm',
+  format: 'dd/MM/yyyy HH:mm',
+  userDateFormat: 'dd/MM/yyyy HH:mm',
 }
 
 export default DateTimeField
