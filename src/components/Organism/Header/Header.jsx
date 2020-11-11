@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import {
   selectFilters,
   selectAllFilters,
   selectHasErrorFilters,
 } from '../../../redux/reducer/FilterReducer'
-import { getFilterRequest } from '../../../redux/actions/filter'
 import { FilterButton } from '../../Atom/FilterButton'
 import { FormField } from '../../Molecule/FormField'
 import { AdvancedFilter } from '../AdvancedFilter'
@@ -14,29 +13,19 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import {
   createYupSchema,
   createInitialValues,
 } from '../../../helpers/formHelper'
-import { StyledFilter } from './styles'
+import { StyledHeader } from './styles'
 import { Typography } from '@material-ui/core'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
-const Filter = () => {
+const Header = () => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
-  const dispatch = useDispatch()
   const filtersState = useSelector(selectFilters)
   const filters = useSelector(selectAllFilters)
   const hasErrorFilter = useSelector(selectHasErrorFilters)
-
-  const getFilter = useCallback(() => dispatch(getFilterRequest()), [
-    dispatch,
-    getFilterRequest,
-  ])
-
-  useEffect(() => {
-    getFilter()
-  }, [getFilter])
 
   const toggleMoreFilters = () => {
     setShowMoreFilters(!showMoreFilters)
@@ -60,7 +49,7 @@ const Filter = () => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <StyledFilter component="header">
+      <StyledHeader component="header">
         <Container maxWidth="lg">
           <Formik
             initialValues={initialValues}
@@ -107,9 +96,9 @@ const Filter = () => {
             }}
           </Formik>
         </Container>
-      </StyledFilter>
+      </StyledHeader>
     </ClickAwayListener>
   )
 }
 
-export default Filter
+export default Header

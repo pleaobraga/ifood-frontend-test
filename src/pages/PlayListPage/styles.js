@@ -22,8 +22,7 @@ export const StyledPlaylistPage = styled(Box)`
       font-size: 2.5rem;
       font-weight: bold;
       
-      margin-top: ${theme.spacing(3)}px;
-      margin-bottom: ${theme.spacing(2)}px;
+      margin: ${theme.spacing(2)}px 0;
 
       ${theme.breakpoints.down('xs')} {
         text-align: center;
