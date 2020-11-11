@@ -36,8 +36,8 @@ SearchBar.propTypes = {
 }
 
 SearchBar.defaultProps = {
-  placeholder: 'searchBar',
-  name: 'Pesquisar',
+  placeholder: 'Pesquisar',
+  name: 'searchBar',
 }
 
 export default SearchBar

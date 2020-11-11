@@ -50,7 +50,7 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
   if (fieldData.values) {
     return (
       <FormField
-        name={fieldData.id}
+        name={`advanced.${fieldData.id}`}
         label={fieldData.name}
         select={true}
         {...formikProps}
@@ -73,7 +73,7 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
     return (
       <DateTimeField
         {...formikProps}
-        name={fieldData.id}
+        name={`advanced.${fieldData.id}`}
         label={fieldData.name}
         format={toUnicodeStandarts(fieldData.validation.pattern)}
       />
@@ -82,7 +82,7 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
 
   return (
     <FormField
-      name={fieldData.id}
+      name={`advanced.${fieldData.id}`}
       label={fieldData.name}
       type={type}
       {...formikProps}
@@ -121,7 +121,9 @@ export const createYupFieldSchema = (schema, config) => {
 export const createYupSchema = (fields) => {
   const fieldsSchema = fields.reduce(createYupFieldSchema, {})
 
-  return schemaValidator.object().shape(fieldsSchema)
+  return schemaValidator
+    .object()
+    .shape({ advanced: schemaValidator.object().shape(fieldsSchema) })
 }
 
 export const createInitialValues = (fields) => {

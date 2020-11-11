@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-import { isEmpty } from 'lodash'
+import { isEmpty, has } from 'lodash'
 import Typography from '@material-ui/core/Typography'
 import Loading from '../../Atom/Loading'
 import { createFormField } from '../../../helpers/formHelper'
@@ -16,10 +16,13 @@ const AdvancedFilter = ({
   error,
   onValuesChange,
 }) => {
-  const debouncedFilters = useDebounce(formikProps.values, 150)
+  const debouncedFilters = useDebounce(formikProps.values?.advanced, 150)
 
   useEffect(() => {
-    onValuesChange(formikProps)
+    const { values, errors } = formikProps
+    const hasErrors = has(errors, 'advanced')
+
+    onValuesChange({ values: values.advanced, hasErrors })
   }, [debouncedFilters])
 
   const renderFilters = () => {

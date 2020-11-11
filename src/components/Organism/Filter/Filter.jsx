@@ -36,10 +36,10 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
     createYupSchema,
   ])
 
-  const initialValues = useMemo(
-    () => createInitialValues([...filters, { id: 'searchBar' }]),
-    [filters, createInitialValues]
-  )
+  const initialValues = useMemo(() => {
+    const advanced = createInitialValues([...filters])
+    return { advanced: advanced, searchBar: '' }
+  }, [filters, createInitialValues])
 
   const handleClickAway = () => {
     if (showMoreFilters) {

@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { isEmpty } from 'lodash'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
@@ -27,8 +26,8 @@ const PlaylitsPage = () => {
     dispatch(filterPlaylist({ filter }))
   }
 
-  const onFiltersChange = ({ values, errors }) => {
-    if (isEmpty(errors)) {
+  const onFiltersChange = ({ values, hasErrors }) => {
+    if (!hasErrors) {
       const filter = createQueryParams(values)
       filter !== apiFilter && dispatch(getPlaylistRequest({ filter }))
     }
