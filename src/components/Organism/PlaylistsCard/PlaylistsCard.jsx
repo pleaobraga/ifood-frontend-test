@@ -6,15 +6,10 @@ import Typography from '@material-ui/core/Typography'
 import Loading from '../../Atom/Loading'
 import { StyledPlaylistsCard } from './styles'
 
-const PlaylistsCard = ({
-  className,
-  playlistsFiltered,
-  isFetching,
-  hasError,
-}) => {
+const PlaylistsCard = ({ className, playlistsFiltered, isFetching, error }) => {
   if (isFetching) return <Loading />
 
-  if (!isEmpty(hasError)) {
+  if (!isEmpty(error)) {
     return (
       <Typography color="textPrimary">
         Houve um erro ao apresentar o resultado, confira os filtros e tente
@@ -45,7 +40,7 @@ PlaylistsCard.propTypes = {
   className: PropTypes.string,
   playlistsFiltered: PropTypes.array,
   isFetching: PropTypes.bool,
-  hasError: PropTypes.object,
+  error: PropTypes.object,
 }
 
 PlaylistsCard.defaultProps = {

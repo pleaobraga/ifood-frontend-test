@@ -21,7 +21,7 @@ export const playlistReducer = (state = initialState, action) => {
         playlistsFiltered: action.playlists,
         apiFilter: action.filter,
         isFetching: false,
-        errorContent: null,
+        error: null,
       }
 
     case types.FILTER_PLAYLIST: {
