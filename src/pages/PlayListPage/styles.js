@@ -3,18 +3,21 @@ import Box from '@material-ui/core/Box'
 
 export const StyledPlaylistPage = styled(Box)`
   ${({ theme }) => `
-  align-items: flex-start;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
   width: 100%;
-  height: 100%;
+  min-width: 100%;
+
   padding-top: 100px;
+  padding-bottom: ${theme.spacing(3)}px;
+
   background: ${theme.palette.background.default};
 
+
   .page{
-
-    &__container {
-      background: ${theme.palette.background.default};
-    }
-
     &__title {
       font-size: 2.5rem;
       font-weight: bold;
