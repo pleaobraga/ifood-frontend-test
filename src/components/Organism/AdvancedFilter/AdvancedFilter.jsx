@@ -5,9 +5,9 @@ import Box from '@material-ui/core/Box'
 import { isEmpty, has } from 'lodash'
 import Typography from '@material-ui/core/Typography'
 import Loading from '../../Atom/Loading'
-import { createFormField } from '../../../helpers/formHelper'
-import { useDebounce } from '../../../helpers/debounce'
-import { DEBOUNCE_CHANGE_FIELDS_TIME } from '../../../helpers/constants'
+import { createFormField } from '../../../utils/formHelper'
+import { useDebounce } from '../../../utils/debounce'
+import { DEBOUNCE_CHANGE_FIELDS_TIME } from '../../../utils/constants'
 import { StyledAdvancedFilter } from './styles'
 
 const AdvancedFilter = ({

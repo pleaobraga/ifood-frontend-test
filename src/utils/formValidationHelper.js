@@ -1,9 +1,5 @@
-import React from 'react'
 import schemaValidator from './yupConfig'
 import { forIn } from 'lodash'
-import { FormField } from '../components/Molecule/FormField'
-import { DateTimeField } from '../components/Molecule/DateTimeField'
-import MenuItem from '@material-ui/core/MenuItem'
 
 export const toUnicodeStandarts = (format) => {
   const regex = /T/gm
@@ -44,52 +40,6 @@ export const getType = (type) => {
   }
 }
 
-export const createFormField = ({ fieldData = null, formikProps }) => {
-  if (!fieldData) return
-
-  if (fieldData.values) {
-    return (
-      <FormField
-        name={`advanced.${fieldData.id}`}
-        label={fieldData.name}
-        select={true}
-        {...formikProps}
-      >
-        <MenuItem value={''} />
-        {fieldData.values.map((value) => (
-          <MenuItem key={value.value} value={value.value}>
-            {value.name}
-          </MenuItem>
-        ))}
-      </FormField>
-    )
-  }
-
-  const { primitiveType, entityType } = fieldData.validation
-
-  const { type } = getType(entityType || primitiveType)
-
-  if (type === 'datetime-local') {
-    return (
-      <DateTimeField
-        {...formikProps}
-        name={`advanced.${fieldData.id}`}
-        label={fieldData.name}
-        format={toUnicodeStandarts(fieldData.validation.pattern)}
-      />
-    )
-  }
-
-  return (
-    <FormField
-      name={`advanced.${fieldData.id}`}
-      label={fieldData.name}
-      type={type}
-      {...formikProps}
-    />
-  )
-}
-
 export const createYupFieldSchema = (schema, config) => {
   const { id, validation } = config
 
@@ -126,9 +76,3 @@ export const createYupSchema = (fields) => {
     .shape({ advanced: schemaValidator.object().shape(fieldsSchema) })
 }
 
-export const createInitialValues = (fields) => {
-  return fields.reduce((initialValues, field) => {
-    initialValues[field.id] = ''
-    return initialValues
-  }, {})
-}

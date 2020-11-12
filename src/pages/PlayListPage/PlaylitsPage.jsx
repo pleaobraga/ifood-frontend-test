@@ -16,9 +16,9 @@ import {
   selectAllPlaylists,
   selectHasErrorPlaylists,
 } from '../../redux/reducer/PlaylistReducer'
-import { createQueryParams } from '../../helpers/urlHelper'
-import { useDebounce } from '../../helpers/debounce'
-import { DEBOUNCE_PLAYLIST_TIME } from '../../helpers/constants'
+import { createQueryParams } from '../../utils/urlHelper'
+import { useDebounce } from '../../utils/debounce'
+import { DEBOUNCE_PLAYLIST_TIME } from '../../utils/constants'
 import { StyledPlaylistPage } from './styles'
 
 const PlaylitsPage = () => {
@@ -51,7 +51,7 @@ const PlaylitsPage = () => {
   const debouncedPlaylist = useDebounce(playlists, DEBOUNCE_PLAYLIST_TIME)
 
   useEffect(() => {
-    updatePlaylist()
+    //updatePlaylist()
   }, [debouncedPlaylist])
 
   const onSearchBarChange = useCallback(

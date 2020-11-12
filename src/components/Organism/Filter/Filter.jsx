@@ -14,10 +14,8 @@ import Box from '@material-ui/core/Box'
 import { Typography } from '@material-ui/core'
 import Container from '@material-ui/core/Container'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
-import {
-  createYupSchema,
-  createInitialValues,
-} from '../../../helpers/formHelper'
+import { createInitialValues } from '../../../utils/formHelper'
+import { createYupSchema } from '../../../utils/formValidationHelper'
 import { SearchBar } from '../../Molecule/SearchBar'
 import Loading from '../../Atom/Loading'
 import { StyledFilter } from './styles'

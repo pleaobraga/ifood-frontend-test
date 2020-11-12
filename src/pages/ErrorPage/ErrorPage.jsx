@@ -1,12 +1,22 @@
 import React from 'react'
-import './ErrorPage.scss'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
+import WarningIcon from '@material-ui/icons/Warning'
+import Container from '@material-ui/core/Container'
+import { StyledErrorPage } from './styles'
 
 const ErrorPage = () => {
   return (
-    <section className="page page-error">
-      <i className="material-icons page-error__icon">error_outline</i>
-      <p className="page-error__text">This page could not be loaded</p>
-    </section>
+    <StyledErrorPage component="main">
+      <Container className="page__container" maxWidth="lg">
+        <Box className="error-page__section" component="section">
+          <Typography color="textPrimary" className="error-page__message">
+            <WarningIcon color="secondary" className="error-page__icon" />
+            Essa pagina não pode ser carregada
+          </Typography>
+        </Box>
+      </Container>
+    </StyledErrorPage>
   )
 }
 
