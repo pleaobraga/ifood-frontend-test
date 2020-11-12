@@ -3,7 +3,9 @@ import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
+import { isEmpty } from 'lodash'
 import {
+  selectIsFetchingFilters,
   selectFilters,
   selectAllFilters,
   selectHasErrorFilters,
@@ -20,6 +22,7 @@ import {
 import { SearchBar } from '../../Molecule/SearchBar'
 import { StyledFilter } from './styles'
 import { Typography } from '@material-ui/core'
+import cx from 'classnames'
 
 const Filter = ({ onSearchBarChange, onFiltersChange }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
@@ -44,6 +47,21 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
   const handleClickAway = () => {
     if (showMoreFilters) {
       setShowMoreFilters(false)
+    }
+  }
+
+  const renderAdvancedFilter = (formikProps) => {
+    if (filters.length > 0 && !isEmpty(initialValues.advanced)) {
+      const AdvancedFilterClassName = cx({ hide: !showMoreFilters })
+
+      return (
+        <AdvancedFilter
+          className={AdvancedFilterClassName}
+          formikProps={formikProps}
+          onValuesChange={onFiltersChange}
+          {...filtersState}
+        />
+      )
     }
   }
 
@@ -76,14 +94,7 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
                       <FilterButton onClick={toggleMoreFilters} />
                     )}
                   </Box>
-
-                  {showMoreFilters && (
-                    <AdvancedFilter
-                      formikProps={formikProps}
-                      onValuesChange={onFiltersChange}
-                      {...filtersState}
-                    />
-                  )}
+                  {renderAdvancedFilter(formikProps)}
                 </Box>
               )
             }}

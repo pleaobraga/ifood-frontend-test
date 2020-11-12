@@ -10,6 +10,10 @@ export const StyledFilter = styled(Paper)`
   width: 100%;
   padding-bottom: ${theme.spacing(1)}px;
 
+  .hide {
+    display: none;
+  }
+
   .filter {
     &__form {
       display: flex;

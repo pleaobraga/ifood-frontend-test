@@ -15,8 +15,9 @@ const AdvancedFilter = ({
   isFetching,
   error,
   onValuesChange,
+  className,
 }) => {
-  const debouncedFilters = useDebounce(formikProps.values?.advanced, 150)
+  const debouncedFilters = useDebounce(formikProps.values?.advanced, 200)
 
   useEffect(() => {
     const { values, errors } = formikProps
@@ -56,7 +57,7 @@ const AdvancedFilter = ({
   }
 
   return (
-    <StyledAdvancedFilter>
+    <StyledAdvancedFilter className={className}>
       <Typography
         element="h2"
         color="textPrimary"
@@ -75,10 +76,12 @@ AdvancedFilter.propTypes = {
   filters: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object.isRequired,
+  className: PropTypes.string,
 }
 
 AdvancedFilter.defaultProps = {
   filters: [],
+  className: '',
 }
 
 export default AdvancedFilter
