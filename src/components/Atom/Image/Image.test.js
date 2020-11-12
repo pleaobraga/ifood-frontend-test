@@ -1,17 +1,13 @@
 import React from 'react'
 import { mount } from 'enzyme'
+import { AppProvider, imageLink } from '../../../utils/testHelper'
 import Image from './Image'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
-import { ThemeProvider } from 'styled-components'
-import theme from '../../../theme'
 
 const setup = (imgSrc = '') => {
   return mount(
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <Image imgSrc={imgSrc} alt="test" />)
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <AppProvider>
+      <Image imgSrc={imgSrc} alt="test" />
+    </AppProvider>
   )
 }
 
@@ -27,9 +23,7 @@ describe('Image', () => {
   })
 
   it('should render  image', () => {
-    const wrapper = setup(
-      'https://i.scdn.co/image/ab67706f0000000341d54d11fdbac4a1c55dc94b'
-    )
+    const wrapper = setup(imageLink)
     expect(wrapper.find('.card__image').exists()).toBe(true)
   })
 })
