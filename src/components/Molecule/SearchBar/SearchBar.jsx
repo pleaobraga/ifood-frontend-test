@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { get } from 'lodash'
 import { FormField } from '../FormField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
-import { get } from 'lodash'
 
 const SearchBar = ({ onSearchBarChange, formikProps, placeholder, name }) => {
   const values = get(formikProps.values, name)
