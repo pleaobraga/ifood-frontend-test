@@ -26,7 +26,7 @@ const FormField = (props) => {
       className={className}
       label={label}
       name={name}
-      value={get(values, name)}
+      value={get(values, name) || ''}
       onChange={handleChange}
       onBlur={handleBlur}
       helperText={has(errors, name) && get(errors, name)}
