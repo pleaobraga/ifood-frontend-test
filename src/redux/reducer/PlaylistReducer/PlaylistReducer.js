@@ -13,7 +13,11 @@ const initialState = {
 export const playlistReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_PLAYLIST_REQUEST:
-      return { ...state, isFetching: true }
+      if (action.updateIsFetching) {
+        return { ...state, canUpdate: false, isFetching: true }
+      }
+
+      return { ...state, canUpdate: false }
 
     case types.GET_PLAYLIST_SUCCESS:
       return {

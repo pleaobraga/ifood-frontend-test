@@ -4,12 +4,16 @@ import PropTypes from 'prop-types'
 import { FormField } from '../FormField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchIcon from '@material-ui/icons/Search'
+import { get } from 'lodash'
 
 const SearchBar = ({ onSearchBarChange, formikProps, placeholder, name }) => {
+  const values = get(formikProps.values, name)
+
+  const currentValue = values[name]
+
   useEffect(() => {
-    const { values } = formikProps
-    onSearchBarChange(values[name])
-  }, [formikProps.values?.[name]])
+    onSearchBarChange(currentValue)
+  }, [currentValue, onSearchBarChange])
 
   return (
     <FormField

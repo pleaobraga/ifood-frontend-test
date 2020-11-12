@@ -13,30 +13,22 @@ import {
 import {
   selectPlaylists,
   selectApiFilter,
+  selectAllPlaylists,
+  selectHasErrorPlaylists,
 } from '../../redux/reducer/PlaylistReducer'
 import { createQueryParams } from '../../helpers/urlHelper'
+import { useDebounce } from '../../helpers/debounce'
+import { DEBOUNCE_PLAYLIST_TIME } from '../../helpers/constants'
 import { StyledPlaylistPage } from './styles'
 
 const PlaylitsPage = () => {
   const dispatch = useDispatch()
   const playlistState = useSelector(selectPlaylists)
+  const playlists = useSelector(selectAllPlaylists)
+  const hasErrorPlaylists = useSelector(selectHasErrorPlaylists)
   const apiFilter = useSelector(selectApiFilter)
 
-  const onSearchBarChange = (filter) => {
-    dispatch(filterPlaylistAction({ filter }))
-  }
-
-  const onFiltersChange = ({ values, hasErrors }) => {
-    if (!hasErrors) {
-      const filter = createQueryParams(values)
-      filter !== apiFilter && dispatch(getPlaylistRequest({ filter }))
-    }
-  }
-
-  const getFilter = useCallback(() => dispatch(getFilterRequest()), [
-    dispatch,
-    getFilterRequest,
-  ])
+  const getFilter = useCallback(() => dispatch(getFilterRequest()), [dispatch])
 
   useEffect(() => {
     getFilter()
@@ -44,12 +36,38 @@ const PlaylitsPage = () => {
 
   const getPlaylist = useCallback(
     () => dispatch(getPlaylistRequest({ filter: '' })),
-    [dispatch, getPlaylistRequest]
+    [dispatch]
   )
 
   useEffect(() => {
     getPlaylist()
   }, [getPlaylist])
+
+  const updatePlaylist = useCallback(() => {
+    !hasErrorPlaylists &&
+      dispatch(getPlaylistRequest({ filter: '', updateIsFetching: false }))
+  }, [dispatch, hasErrorPlaylists])
+
+  const debouncedPlaylist = useDebounce(playlists, DEBOUNCE_PLAYLIST_TIME)
+
+  useEffect(() => {
+    updatePlaylist()
+  }, [debouncedPlaylist])
+
+  const onSearchBarChange = useCallback(
+    (filter) => dispatch(filterPlaylistAction({ filter })),
+    [dispatch]
+  )
+
+  const onFiltersChange = useCallback(
+    ({ values, hasErrors }) => {
+      if (!hasErrors) {
+        const filter = createQueryParams(values)
+        filter !== apiFilter && dispatch(getPlaylistRequest({ filter }))
+      }
+    },
+    [dispatch, apiFilter]
+  )
 
   return (
     <>

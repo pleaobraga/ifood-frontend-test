@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Loading from '../../Atom/Loading'
 import { createFormField } from '../../../helpers/formHelper'
 import { useDebounce } from '../../../helpers/debounce'
+import { DEBOUNCE_CHANGE_FIELDS_TIME } from '../../../helpers/constants'
 import { StyledAdvancedFilter } from './styles'
 
 const AdvancedFilter = ({
@@ -17,7 +18,10 @@ const AdvancedFilter = ({
   onValuesChange,
   className,
 }) => {
-  const debouncedFilters = useDebounce(formikProps.values?.advanced, 200)
+  const debouncedFilters = useDebounce(
+    formikProps.values?.advanced,
+    DEBOUNCE_CHANGE_FIELDS_TIME
+  )
 
   useEffect(() => {
     const { values, errors } = formikProps

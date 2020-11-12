@@ -6,9 +6,10 @@ export const types = {
   FILTER_PLAYLIST_SUCCESS: 'playlist/filter_playlist_success',
 }
 
-export const getPlaylistRequest = ({ filter }) => ({
+export const getPlaylistRequest = ({ filter, updateIsFetching = true }) => ({
   type: types.GET_PLAYLIST_REQUEST,
   filter,
+  updateIsFetching,
 })
 
 export const getPlaylistSuccess = ({ playlists, filter }) => ({

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
@@ -29,13 +29,15 @@ sagaMiddleware.run(rootSaga)
 ReactDOM.render(
   <Provider store={store}>
     <CssBaseline />
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Routes />
-        </MuiPickersUtilsProvider>
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <StrictMode>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Routes />
+          </MuiPickersUtilsProvider>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StrictMode>
   </Provider>,
   document.getElementById('root')
 )

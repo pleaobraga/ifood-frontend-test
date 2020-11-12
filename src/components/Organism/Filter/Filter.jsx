@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
@@ -32,15 +31,12 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
     setShowMoreFilters(!showMoreFilters)
   }
 
-  const validationSchema = useMemo(() => createYupSchema(filters), [
-    filters,
-    createYupSchema,
-  ])
+  const validationSchema = useMemo(() => createYupSchema(filters), [filters])
 
   const initialValues = useMemo(() => {
     const advanced = createInitialValues([...filters])
     return { advanced: advanced, searchBar: '' }
-  }, [filters, createInitialValues])
+  }, [filters])
 
   const handleClickAway = () => {
     if (showMoreFilters) {
