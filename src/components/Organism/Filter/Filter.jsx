@@ -3,9 +3,7 @@ import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
-import { isEmpty } from 'lodash'
 import {
-  selectIsFetchingFilters,
   selectFilters,
   selectAllFilters,
   selectHasErrorFilters,
@@ -49,21 +47,7 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
       setShowMoreFilters(false)
     }
   }
-
-  const renderAdvancedFilter = (formikProps) => {
-    if (filters.length > 0 && !isEmpty(initialValues.advanced)) {
-      const AdvancedFilterClassName = cx({ hide: !showMoreFilters })
-
-      return (
-        <AdvancedFilter
-          className={AdvancedFilterClassName}
-          formikProps={formikProps}
-          onValuesChange={onFiltersChange}
-          {...filtersState}
-        />
-      )
-    }
-  }
+  const AdvancedFilterClassName = cx({ hide: !showMoreFilters })
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
@@ -94,7 +78,12 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
                       <FilterButton onClick={toggleMoreFilters} />
                     )}
                   </Box>
-                  {renderAdvancedFilter(formikProps)}
+                  <AdvancedFilter
+                    className={AdvancedFilterClassName}
+                    formikProps={formikProps}
+                    onValuesChange={onFiltersChange}
+                    {...filtersState}
+                  />
                 </Box>
               )
             }}

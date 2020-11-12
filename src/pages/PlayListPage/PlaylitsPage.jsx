@@ -8,7 +8,7 @@ import { Filter } from '../../components/Organism/Filter'
 import { getFilterRequest } from '../../redux/actions/filter'
 import {
   getPlaylistRequest,
-  filterPlaylist,
+  filterPlaylistAction,
 } from '../../redux/actions/playlist'
 import {
   selectPlaylists,
@@ -23,7 +23,7 @@ const PlaylitsPage = () => {
   const apiFilter = useSelector(selectApiFilter)
 
   const onSearchBarChange = (filter) => {
-    dispatch(filterPlaylist({ filter }))
+    dispatch(filterPlaylistAction({ filter }))
   }
 
   const onFiltersChange = ({ values, hasErrors }) => {

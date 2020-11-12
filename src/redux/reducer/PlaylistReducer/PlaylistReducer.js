@@ -1,4 +1,5 @@
 import { types } from '../../actions/playlist'
+import { isNull } from 'lodash'
 
 const initialState = {
   playlists: [],
@@ -18,29 +19,10 @@ export const playlistReducer = (state = initialState, action) => {
       return {
         ...state,
         playlists: action.playlists,
-        playlistsFiltered: action.playlists,
         apiFilter: action.filter,
         isFetching: false,
         error: null,
       }
-
-    case types.FILTER_PLAYLIST: {
-      let newList
-
-      if (action.filter === '') {
-        newList = state.playlists
-      } else {
-        newList = state.playlists.filter(({ name }) =>
-          name.toUpperCase().includes(action.filter.toUpperCase())
-        )
-      }
-
-      return {
-        ...state,
-        playlistsFiltered: newList,
-        localFilter: action.filter,
-      }
-    }
 
     case types.GET_PLAYLIST_ERROR:
       return {
@@ -48,6 +30,18 @@ export const playlistReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.error,
       }
+
+    case types.FILTER_PLAYLIST_SUCCESS: {
+      const localFilter = isNull(action.filter)
+        ? state.localFilter
+        : action.filter
+
+      return {
+        ...state,
+        playlistsFiltered: action.filteredPlaylists,
+        localFilter,
+      }
+    }
 
     default:
       return state
