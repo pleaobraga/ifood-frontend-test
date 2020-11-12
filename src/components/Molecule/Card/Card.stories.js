@@ -60,7 +60,7 @@ export default storiesOf('Components | Molecule/Card', module)
       propTables: [Card],
       text: `
           ~~~js
-          <Card  />
+          <Card link={link} name={name}  />
           ~~~
       `,
     },

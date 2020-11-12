@@ -46,7 +46,7 @@ export default storiesOf('Components | Atom/Image', module)
         propTables: [Image],
         text: `
           ~~~js
-          <Image imgSrc={imgSrc} />
+          <Image  />
           ~~~
       `,
       },
