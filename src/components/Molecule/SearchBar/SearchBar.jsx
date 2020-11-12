@@ -33,7 +33,7 @@ const SearchBar = ({ onSearchBarChange, formikProps, placeholder, name }) => {
 
 SearchBar.propTypes = {
   onSearchBarChange: PropTypes.func,
-  formikProps: PropTypes.object,
+  formikProps: PropTypes.object.isRequired,
   placeholder: PropTypes.string,
   name: PropTypes.string,
 }
@@ -41,6 +41,7 @@ SearchBar.propTypes = {
 SearchBar.defaultProps = {
   placeholder: 'Pesquisar',
   name: 'searchBar',
+  onSearchBarChange: () => {},
 }
 
 export default SearchBar

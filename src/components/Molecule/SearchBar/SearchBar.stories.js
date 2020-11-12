@@ -24,7 +24,12 @@ export default storiesOf('Components | Molecule/SearchBar', module)
         propTables: [SearchBar],
         text: `
           ~~~js
-          <SearchBar name={name} />
+          <SearchBar 
+            name={name} 
+            placeholder={placeholder},
+            onSearchBarChange={onSearchBarChange},
+            formikProps={formikProps},
+          />
           ~~~
       `,
       },
