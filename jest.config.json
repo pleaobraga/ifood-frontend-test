@@ -6,6 +6,8 @@
   },
   "collectCoverageFrom": [
     "src/**/*.{js,jsx}",
+    "!**/**/constants.js",
+    "!**/**/testHelper.js",
     "!**/api/**",
     "!**/**/styles.js",
     "!**/index.js",
