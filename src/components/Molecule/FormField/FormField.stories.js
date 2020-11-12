@@ -31,6 +31,32 @@ export default storiesOf('Components | Molecule/FormField', module)
     }
   )
   .add(
+    'With Error',
+    (props) => (
+      <div style={{ background: '#303030', width: '300px', padding: '10px' }}>
+        <FormField
+          {...props}
+          name="test"
+          label={text('Label', 'Error Text field')}
+          errors={{ test: 'Digite um valor válido' }}
+        />
+      </div>
+    ),
+    {
+      info: {
+        inline: true,
+        header: false,
+        source: false,
+        propTables: [FormField],
+        text: `
+          ~~~js
+          <FormField label="Test" name="test" {..props} />
+          ~~~
+      `,
+      },
+    }
+  )
+  .add(
     'Select',
     (props) => (
       <div style={{ background: '#303030', width: '300px', padding: '10px' }}>

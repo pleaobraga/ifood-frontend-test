@@ -104,7 +104,7 @@ export default storiesOf('Components | Organism/AdvancedFilter', module)
         propTables: [AdvancedFilter],
         text: `
           ~~~js
-          <AdvancedFilter filters={filter} formikProps={{ ...formikProps }} />
+          <AdvancedFilter filters={filter} formikProps={formikProps} />
           ~~~
       `,
       },
