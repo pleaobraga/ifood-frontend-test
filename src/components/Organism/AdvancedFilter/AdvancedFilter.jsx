@@ -41,14 +41,16 @@ const AdvancedFilter = ({
 
     if (!isEmpty(error)) {
       return (
-        <Typography color="textPrimary">
+        <Typography className="advanced-filter__error" color="textPrimary">
           Houve um erro ao carregar os filtros
         </Typography>
       )
     }
 
     return filters.length === 0 ? (
-      <Typography color="textPrimary">Não existem filtros avançados</Typography>
+      <Typography className="advanced-filter__empty" color="textPrimary">
+        Não existem filtros avançados
+      </Typography>
     ) : (
       <Grid
         container
