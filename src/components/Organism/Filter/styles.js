@@ -34,13 +34,17 @@ export const StyledFilter = styled(Paper)`
     font-weight: bold;
 
     ${theme.breakpoints.down('sm')} {
-      margin-right: 1.5rem;
+      margin-right: ${theme.spacing(2)}px;
     }
 
 
     ${theme.breakpoints.down('xs')} {
       display:none
     }
+  }
+
+  .loader {
+    margin-left: ${theme.spacing(2)}px;
   }
   `}
 `

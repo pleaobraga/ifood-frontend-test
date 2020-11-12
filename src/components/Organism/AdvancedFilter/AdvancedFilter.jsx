@@ -50,9 +50,21 @@ const AdvancedFilter = ({
     return filters.length === 0 ? (
       <Typography color="textPrimary">Não existem filtros avançados</Typography>
     ) : (
-      <Grid container spacing={2} wrap="wrap">
+      <Grid
+        container
+        spacing={2}
+        wrap="wrap"
+        className="advanced-filter__filters-container"
+      >
         {filters.map((f) => (
-          <Grid item md={3} sm={4} xs={12} key={`grid-${f.id}`}>
+          <Grid
+            item
+            md={3}
+            sm={4}
+            xs={12}
+            key={`grid-${f.id}`}
+            className="advanced-filter__filter"
+          >
             {createFormField({ fieldData: f, formikProps })}
           </Grid>
         ))}

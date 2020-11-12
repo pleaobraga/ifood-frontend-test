@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
 import { Card } from '../../Molecule/Card'
 import Typography from '@material-ui/core/Typography'
-import Loading from '../../Atom/Loading'
-import { StyledPlaylistsCard } from './styles'
+import { StyledPlaylistsCard, Loader } from './styles'
 
 const PlaylistsCard = ({ className, playlistsFiltered, isFetching, error }) => {
-  if (isFetching) return <Loading />
+  if (isFetching) return <Loader />
 
   if (!isEmpty(error)) {
     return (

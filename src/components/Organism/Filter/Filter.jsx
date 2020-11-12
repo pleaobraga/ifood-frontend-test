@@ -6,10 +6,12 @@ import {
   selectFilters,
   selectAllFilters,
   selectHasErrorFilters,
+  selectIsFetchingFilters,
 } from '../../../redux/reducer/FilterReducer'
 import { FilterButton } from '../../Atom/FilterButton'
 import { AdvancedFilter } from '../AdvancedFilter'
 import Box from '@material-ui/core/Box'
+import { Typography } from '@material-ui/core'
 import Container from '@material-ui/core/Container'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import {
@@ -17,13 +19,14 @@ import {
   createInitialValues,
 } from '../../../helpers/formHelper'
 import { SearchBar } from '../../Molecule/SearchBar'
+import Loading from '../../Atom/Loading'
 import { StyledFilter } from './styles'
-import { Typography } from '@material-ui/core'
 import cx from 'classnames'
 
 const Filter = ({ onSearchBarChange, onFiltersChange }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
   const filtersState = useSelector(selectFilters)
+  const isFetchingFilters = useSelector(selectIsFetchingFilters)
   const filters = useSelector(selectAllFilters)
   const hasErrorFilter = useSelector(selectHasErrorFilters)
 
@@ -43,6 +46,15 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
       setShowMoreFilters(false)
     }
   }
+
+  const renderFilterButton = () => {
+    if (isFetchingFilters) return <Loading className="loader" />
+
+    if (filters.length > 0 && !hasErrorFilter) {
+      return <FilterButton onClick={toggleMoreFilters} />
+    }
+  }
+
   const AdvancedFilterClassName = cx({ hide: !showMoreFilters })
 
   return (
@@ -70,9 +82,7 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
                       formikProps={formikProps}
                       onSearchBarChange={onSearchBarChange}
                     />
-                    {filters.length > 0 && !hasErrorFilter && (
-                      <FilterButton onClick={toggleMoreFilters} />
-                    )}
+                    {renderFilterButton()}
                   </Box>
                   <AdvancedFilter
                     className={AdvancedFilterClassName}
