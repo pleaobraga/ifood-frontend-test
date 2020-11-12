@@ -1,29 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import PlaylistsCard from './PlaylistsCard'
-
-const card = {
-  id: 'test',
-  name: 'test',
-  external_urls: {
-    spotify: 'https://open.spotify.com/playlist/37i9dQZF1DWTMYgB8TqtmR',
-  },
-  images: [
-    {
-      url: 'https://i.scdn.co/image/ab67706f0000000341d54d11fdbac4a1c55dc94b',
-    },
-  ],
-}
-
-const cardList = () => {
-  const list = []
-
-  for (let i = 0; i < 6; i++) {
-    list.push(card)
-  }
-
-  return list
-}
+import { cardList } from '../../../utils/testHelper'
 
 export default storiesOf('Components | Organism/CardList', module)
   .add(
@@ -71,7 +49,7 @@ export default storiesOf('Components | Organism/CardList', module)
         text: `
           ~~~js
           <PlaylistsCard 
-            playlistsFiltered={playlistsFiltered} 
+            playlistsFiltered={[]} 
             isFetching={isFetching}
             error={error}
           />
@@ -102,7 +80,7 @@ export default storiesOf('Components | Organism/CardList', module)
           <PlaylistsCard 
             playlistsFiltered={playlistsFiltered} 
             isFetching={isFetching}
-            error={error}
+            error={true}
           />
           ~~~
       `,
@@ -130,7 +108,7 @@ export default storiesOf('Components | Organism/CardList', module)
           ~~~js
           <PlaylistsCard 
             playlistsFiltered={playlistsFiltered} 
-            isFetching={isFetching}
+            isFetching={true}
             error={error}
           />
           ~~~

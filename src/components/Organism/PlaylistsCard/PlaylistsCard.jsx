@@ -10,7 +10,7 @@ const PlaylistsCard = ({ className, playlistsFiltered, isFetching, error }) => {
 
   if (!isEmpty(error)) {
     return (
-      <Typography color="textPrimary">
+      <Typography className="play-lists__error" color="textPrimary">
         Houve um erro ao apresentar o resultado, confira os filtros e tente
         novamente
       </Typography>
@@ -18,7 +18,9 @@ const PlaylistsCard = ({ className, playlistsFiltered, isFetching, error }) => {
   }
 
   return playlistsFiltered.length === 0 ? (
-    <Typography color="textPrimary">Nenhum item a ser exibido.</Typography>
+    <Typography className="play-lists__empty" color="textPrimary">
+      Nenhum item a ser exibido.
+    </Typography>
   ) : (
     <StyledPlaylistsCard className={className}>
       {playlistsFiltered.map(({ external_urls, id, name, images }) => {
