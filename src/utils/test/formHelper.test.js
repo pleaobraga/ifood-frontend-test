@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme'
 import { mockFormikProps } from '../testHelper'
 import { createInitialValues, createFormField } from '../formHelper'
