@@ -89,15 +89,16 @@ const AdvancedFilter = ({
 AdvancedFilter.propTypes = {
   onValuesChange: PropTypes.func,
   formikProps: PropTypes.object.isRequired,
-  filters: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  error: PropTypes.object.isRequired,
+  filters: PropTypes.array,
+  isFetching: PropTypes.bool,
+  error: PropTypes.object,
   className: PropTypes.string,
 }
 
 AdvancedFilter.defaultProps = {
   filters: [],
   className: '',
+  onValuesChange: () => {},
 }
 
 export default AdvancedFilter
