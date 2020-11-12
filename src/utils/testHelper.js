@@ -22,5 +22,14 @@ AppProvider.propTypes = {
   children: PropTypes.node,
 }
 
+export const mockFormikProps = {
+  errors: {},
+  values: {},
+  handleChange: () => {},
+  handleBlur: () => {},
+  setFieldValue: () => {},
+  setFieldTouched: () => {},
+}
+
 export const imageLink =
   'https://i.scdn.co/image/ab67706f0000000341d54d11fdbac4a1c55dc94b'
