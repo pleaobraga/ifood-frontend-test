@@ -6,6 +6,7 @@
   },
   "collectCoverageFrom": [
     "src/**/*.{js,jsx}",
+    "!**/api/**",
     "!**/**/styles.js",
     "!**/index.js",
     "!**/*stories.{js,jsx}",
