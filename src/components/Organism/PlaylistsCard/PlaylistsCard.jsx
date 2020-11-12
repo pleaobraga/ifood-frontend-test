@@ -44,6 +44,7 @@ PlaylistsCard.propTypes = {
 
 PlaylistsCard.defaultProps = {
   className: '',
+  playlistsFiltered: [],
 }
 
 export default PlaylistsCard
