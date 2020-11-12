@@ -3,9 +3,9 @@ import { mount } from 'enzyme'
 import Loading from './Loading'
 
 describe('Loading', () => {
-  let loading = mount(<Loading />)
+  let wrapper = mount(<Loading />)
 
   it('render proprely', () => {
-    expect(loading).toMatchSnapshot()
+    expect(wrapper.find(Loading).length).toBe(1)
   })
 })
