@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { ThemeProvider } from 'styled-components'
 import theme from '../theme'
@@ -9,6 +10,10 @@ export const AppProvider = ({ children }) => {
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </MuiThemeProvider>
   )
+}
+
+AppProvider.propTypes = {
+  children: PropTypes.node,
 }
 
 export const imageLink =
