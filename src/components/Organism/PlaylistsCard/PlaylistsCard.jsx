@@ -40,7 +40,7 @@ PlaylistsCard.propTypes = {
   className: PropTypes.string,
   playlistsFiltered: PropTypes.array,
   isFetching: PropTypes.bool,
-  error: PropTypes.object,
+  error: PropTypes.string,
 }
 
 PlaylistsCard.defaultProps = {

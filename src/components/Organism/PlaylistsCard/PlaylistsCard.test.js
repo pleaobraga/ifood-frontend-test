@@ -36,7 +36,7 @@ describe('PlaylistsCard', () => {
   })
 
   it('should render error state', () => {
-    const wrapper = setup({ error: { error: 'error' } })
+    const wrapper = setup({ error: 'error' })
     expect(wrapper.find('.play-lists__error').exists()).toBe(true)
   })
 })
