@@ -13,7 +13,7 @@
     "test:update": "yarn test -- -u",
     "test:coverage": "yarn test -- --coverage --colors",
     "lint": "esw . --ext .js,.jsx --color ",
-    "lint:watch": "yarn lint -- --watch",
+    "lint:watch": "yarn lint --watch",
     "storybook": "start-storybook -p 9000 -c .storybook -s ./public",
     "predeploy": "yarn deploy-storybook",
     "deploy": "gh-pages -d docs ",
