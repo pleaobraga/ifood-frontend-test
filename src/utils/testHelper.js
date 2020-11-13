@@ -146,3 +146,97 @@ export const advancedFilter = [
     },
   },
 ]
+
+export const playlists = {
+  message: 'New Music Friday!',
+  playlists: {
+    href:
+      'https://api.spotify.com/v1/browse/featured-playlists?country=SE&timestamp=2020-11-13T12%3A49%3A08&offset=0&limit=2',
+    items: [
+      {
+        collaborative: false,
+        description: 'Äntligen fredag! Ny musik! Happy New Music Friday!',
+        external_urls: {
+          spotify: 'https://open.spotify.com/playlist/37i9dQZF1DXcecv7ESbOPu',
+        },
+        href: 'https://api.spotify.com/v1/playlists/37i9dQZF1DXcecv7ESbOPu',
+        id: '37i9dQZF1DXcecv7ESbOPu',
+        images: [
+          {
+            height: null,
+            url:
+              'https://i.scdn.co/image/ab67706f00000003af9685b5d3616954b050da98',
+            width: null,
+          },
+        ],
+        name: 'New Music Friday Sweden',
+        owner: {
+          display_name: 'Spotify',
+          external_urls: {
+            spotify: 'https://open.spotify.com/user/spotify',
+          },
+          href: 'https://api.spotify.com/v1/users/spotify',
+          id: 'spotify',
+          type: 'user',
+          uri: 'spotify:user:spotify',
+        },
+        primary_color: null,
+        public: null,
+        snapshot_id:
+          'MTYwNTI1NTg3MCwwMDAwMDJiNDAwMDAwMTc1YzBiNGI5ZWIwMDAwMDE3NWJjOWJlMDkz',
+        tracks: {
+          href:
+            'https://api.spotify.com/v1/playlists/37i9dQZF1DXcecv7ESbOPu/tracks',
+          total: 103,
+        },
+        type: 'playlist',
+        uri: 'spotify:playlist:37i9dQZF1DXcecv7ESbOPu',
+      },
+      {
+        collaborative: false,
+        description: 'Håll det 100.',
+        external_urls: {
+          spotify: 'https://open.spotify.com/playlist/37i9dQZF1DWXfgo3OOonqa',
+        },
+        href: 'https://api.spotify.com/v1/playlists/37i9dQZF1DWXfgo3OOonqa',
+        id: '37i9dQZF1DWXfgo3OOonqa',
+        images: [
+          {
+            height: null,
+            url:
+              'https://i.scdn.co/image/ab67706f000000037c1acd9201741549440e0b4c',
+            width: null,
+          },
+        ],
+        name: '100',
+        owner: {
+          display_name: 'Spotify',
+          external_urls: {
+            spotify: 'https://open.spotify.com/user/spotify',
+          },
+          href: 'https://api.spotify.com/v1/users/spotify',
+          id: 'spotify',
+          type: 'user',
+          uri: 'spotify:user:spotify',
+        },
+        primary_color: null,
+        public: null,
+        snapshot_id:
+          'MTYwNTIyNDE1NywwMDAwMDViMTAwMDAwMTc1YmVkMGQyYjIwMDAwMDE3NWJkNTkzZTA0',
+        tracks: {
+          href:
+            'https://api.spotify.com/v1/playlists/37i9dQZF1DWXfgo3OOonqa/tracks',
+          total: 81,
+        },
+        type: 'playlist',
+        uri: 'spotify:playlist:37i9dQZF1DWXfgo3OOonqa',
+      },
+    ],
+    limit: 2,
+    next:
+      'https://api.spotify.com/v1/browse/featured-playlists?country=SE&timestamp=2020-11-13T12%3A49%3A08&offset=2&limit=2',
+    offset: 0,
+    previous: null,
+    total: 12,
+  },
+}
