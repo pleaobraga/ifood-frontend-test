@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
@@ -21,7 +21,7 @@ import Loading from '../../Atom/Loading'
 import { StyledFilter } from './styles'
 import cx from 'classnames'
 
-const Filter = ({ onSearchBarChange, onFiltersChange }) => {
+const Filter = ({ onSearchBarChange, onFiltersChange, onPageError }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
   const filtersState = useSelector(selectFilters)
   const isFetchingFilters = useSelector(selectIsFetchingFilters)
@@ -52,6 +52,12 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
       return <FilterButton onClick={toggleMoreFilters} />
     }
   }
+
+  useEffect(() => {
+    if (onPageError === true) {
+      setShowMoreFilters(false)
+    }
+  }, [onPageError])
 
   const AdvancedFilterClassName = cx({ hide: !showMoreFilters })
 
@@ -101,6 +107,7 @@ const Filter = ({ onSearchBarChange, onFiltersChange }) => {
 Filter.propTypes = {
   onSearchBarChange: PropTypes.func,
   onFiltersChange: PropTypes.func,
+  onPageError: PropTypes.bool,
 }
 
 export default Filter

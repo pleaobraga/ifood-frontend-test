@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
@@ -71,11 +71,14 @@ const PlaylitsPage = () => {
     [dispatch, apiFilter]
   )
 
+  const onPageError = useMemo(() => hasErrorPlaylists, [hasErrorPlaylists])
+
   return (
     <>
       <Filter
         onSearchBarChange={onSearchBarChange}
         onFiltersChange={onFiltersChange}
+        onPageError={onPageError}
       />
       <StyledPlaylistPage component="main">
         <Container className="page__container" maxWidth="lg">

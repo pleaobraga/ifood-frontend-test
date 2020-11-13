@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'lodash'
+import { isNull } from 'lodash'
 import { Card } from '../../Molecule/Card'
 import Typography from '@material-ui/core/Typography'
 import { StyledPlaylistsCard, Loader } from './styles'
@@ -8,7 +8,7 @@ import { StyledPlaylistsCard, Loader } from './styles'
 const PlaylistsCard = ({ className, playlistsFiltered, isFetching, error }) => {
   if (isFetching) return <Loader />
 
-  if (!isEmpty(error)) {
+  if (!isNull(error)) {
     return (
       <Typography className="play-lists__error" color="textPrimary">
         {error}
