@@ -14,10 +14,10 @@ export const playlistReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_PLAYLIST_REQUEST:
       if (action.updateIsFetching) {
-        return { ...state, canUpdate: false, isFetching: true }
+        return { ...state, isFetching: true }
       }
 
-      return { ...state, canUpdate: false }
+      return state
 
     case types.GET_PLAYLIST_SUCCESS:
       return {
@@ -43,7 +43,7 @@ export const playlistReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        playlistsFiltered: action.filteredPlaylists,
+        playlistsFiltered: action.playlistsFiltered,
         localFilter,
       }
     }

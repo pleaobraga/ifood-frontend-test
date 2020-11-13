@@ -58,12 +58,12 @@ function* filterPlaylist({ playlists, filter }) {
       : yield select(selectLocalFilter)
     const currentPlaylists = playlists || (yield select(selectAllPlaylists))
 
-    let filteredPlaylists
+    let playlistsFiltered
 
     if (currentFilter === '') {
-      filteredPlaylists = [...currentPlaylists]
+      playlistsFiltered = [...currentPlaylists]
     } else {
-      filteredPlaylists = currentPlaylists.filter(({ name }) =>
+      playlistsFiltered = currentPlaylists.filter(({ name }) =>
         name.toUpperCase().includes(currentFilter.toUpperCase())
       )
     }
@@ -71,7 +71,7 @@ function* filterPlaylist({ playlists, filter }) {
     yield put(
       filterPlaylistSuccess({
         filter: currentFilter,
-        filteredPlaylists,
+        playlistsFiltered,
       })
     )
   } catch (e) {

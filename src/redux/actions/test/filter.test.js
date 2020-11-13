@@ -1,10 +1,10 @@
-import { initialStateRootReducer, mockStore } from '../__mocks__/reduxMock'
+import { initialStateRootReducer, mockStore } from '../../__mocks__/reduxMock'
 import {
   types,
   getFilterRequest,
   getFilterSuccess,
   getFilterError,
-} from './filter'
+} from '../filter'
 
 describe('action filter', () => {
   it('should dispatch getFilterRequest', () => {

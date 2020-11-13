@@ -30,8 +30,8 @@ export const filterPlaylistAction = ({ filter = null, playlists = null }) => ({
   playlists,
 })
 
-export const filterPlaylistSuccess = ({ filter, filteredPlaylists }) => ({
+export const filterPlaylistSuccess = ({ filter, playlistsFiltered }) => ({
   type: types.FILTER_PLAYLIST_SUCCESS,
   filter,
-  filteredPlaylists,
+  playlistsFiltered,
 })

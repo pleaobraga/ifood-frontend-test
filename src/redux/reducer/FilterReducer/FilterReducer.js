@@ -16,7 +16,7 @@ export const filterReducer = (state = initialState, action) => {
         ...state,
         filters: action.filters,
         isFetching: false,
-        errorContent: null,
+        error: null,
       }
 
     case types.GET_FILTER_ERROR:

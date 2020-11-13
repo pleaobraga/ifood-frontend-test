@@ -1,4 +1,4 @@
-import { initialStateRootReducer, mockStore } from '../__mocks__/reduxMock'
+import { initialStateRootReducer, mockStore } from '../../__mocks__/reduxMock'
 import {
   types,
   getPlaylistRequest,
@@ -6,7 +6,7 @@ import {
   getPlaylistError,
   filterPlaylistAction,
   filterPlaylistSuccess,
-} from './playlist'
+} from '../playlist'
 
 describe('action playlist', () => {
   const filter = []
@@ -72,7 +72,7 @@ describe('action playlist', () => {
     })
 
     it('should dispatch filterPlaylistSuccess', () => {
-      const content = { filter, filteredPlaylists: [] }
+      const content = { filter, playlistsFiltered: [] }
       const payload = { type: types.FILTER_PLAYLIST_SUCCESS, ...content }
       const store = mockStore(initialStateRootReducer)
 
