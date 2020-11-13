@@ -5,7 +5,6 @@ import {
   getPlaylistError,
   filterPlaylistSuccess,
   filterPlaylistAction,
-  getPlaylistRequest,
 } from '../actions/playlist'
 import { getPlaylistAPI } from '../../api/playlist'
 import { getToken, getNewToken } from '../../service/spotifyAuth'
