@@ -61,7 +61,7 @@ yarn storybook
 
 # Project development
 
-This project is was build from [**React Scaffold**](https://pleaobraga.github.io/spotifood/?path=/story/components-molecule-card--default) an open souce project created by myself which helps you to create a react project from scratch and that project does not create-react-app, I set everything up from zero.
+This project is was build from [**React Scaffold**](https://github.com/pleaobraga/react-scaffold) an open souce project created by myself which helps you to create a react project from scratch and that project does not create-react-app, I set everything up from zero.
 
 To achieve the test requirements I chose to use Redux-saga to help with the race condition and the lib date-fns to deal with the date format because it has the most closer patter to deal with the date pattern provided by the API.
 
