@@ -33,6 +33,7 @@ export const playlistReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: action.error,
+        apiFilter: action.filter,
       }
 
     case types.FILTER_PLAYLIST_SUCCESS: {

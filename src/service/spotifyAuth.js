@@ -19,19 +19,16 @@ const options = {
 
 export const isTokenValid = () => {
   const tokenExpiration = localStorage.getItem('spotify_token_expiration')
+  const token = localStorage.getItem('spotify_token')
 
-  if (!tokenExpiration) {
+  if (!tokenExpiration || !token) {
     return false
   }
 
   return compareAsc(new Date(tokenExpiration), new Date()) === 1
 }
 
-export const getToken = async () => {
-  if (isTokenValid()) {
-    return localStorage.getItem('spotify_token')
-  }
-
+export const getNewToken = async () => {
   try {
     const response = await fetch(SPOTIFY_TOKEN_API, options)
 
@@ -46,4 +43,12 @@ export const getToken = async () => {
   } catch (e) {
     return e
   }
+}
+
+export const getToken = async () => {
+  if (isTokenValid()) {
+    return localStorage.getItem('spotify_token')
+  }
+
+  getNewToken()
 }

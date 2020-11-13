@@ -5,9 +5,10 @@ import {
   getPlaylistError,
   filterPlaylistSuccess,
   filterPlaylistAction,
+  getPlaylistRequest,
 } from '../actions/playlist'
 import { getPlaylistAPI } from '../../api/playlist'
-import { getToken } from '../../service/spotifyAuth'
+import { getToken, getNewToken } from '../../service/spotifyAuth'
 import {
   selectLocalFilter,
   selectAllPlaylists,
@@ -24,11 +25,21 @@ function* getPlaylist({ filter }) {
     yield put(getPlaylistSuccess({ playlists, filter }))
     yield put(filterPlaylistAction({ playlists }))
   } catch (e) {
-    yield put(
-      getPlaylistError({
-        error: 'An error occurred when trying to get the Playlist',
-      })
-    )
+    const { status } = e.response
+
+    switch (status) {
+      case 401:
+        yield getNewToken()
+        yield put(getPlaylistRequest({ filter }))
+        break
+
+      default:
+        yield put(
+          getPlaylistError({
+            error: 'An error occurred when trying to get the Playlist',
+          })
+        )
+    }
   }
 }
 

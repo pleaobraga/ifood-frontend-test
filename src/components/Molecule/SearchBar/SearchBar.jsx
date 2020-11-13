@@ -9,11 +9,9 @@ import SearchIcon from '@material-ui/icons/Search'
 const SearchBar = ({ onSearchBarChange, formikProps, placeholder, name }) => {
   const values = get(formikProps.values, name)
 
-  const currentValue = values[name]
-
   useEffect(() => {
-    onSearchBarChange(currentValue)
-  }, [currentValue, onSearchBarChange])
+    onSearchBarChange(values)
+  }, [values, onSearchBarChange])
 
   return (
     <FormField

@@ -15,7 +15,9 @@ export const createFormField = ({ fieldData = null, formikProps }) => {
         select={true}
         {...formikProps}
       >
-        <MenuItem value={''} />
+        <MenuItem value={''}>
+          <em>Limpar</em>
+        </MenuItem>
         {fieldData.values.map((value) => (
           <MenuItem key={value.value} value={value.value}>
             {value.name}

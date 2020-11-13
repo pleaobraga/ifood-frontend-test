@@ -18,8 +18,9 @@ export const getPlaylistSuccess = ({ playlists, filter }) => ({
   filter,
 })
 
-export const getPlaylistError = (error) => ({
+export const getPlaylistError = ({ error }) => ({
   type: types.GET_PLAYLIST_ERROR,
+  filter: 'error',
   error,
 })
 
