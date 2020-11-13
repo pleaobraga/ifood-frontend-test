@@ -1,4 +1,4 @@
-import schemaValidator from './yupConfig'
+import schemaValidator from './yup.config'
 import { forIn } from 'lodash'
 
 export const toUnicodeStandarts = (format) => {
