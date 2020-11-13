@@ -61,7 +61,6 @@ const PlaylitsPage = () => {
 
   const onFiltersChange = useCallback(
     ({ values, hasErrors }) => {
-      debugger
       if (!hasErrors) {
         const filter = createQueryParams(values)
         filter !== apiFilter && dispatch(getPlaylistRequest({ filter }))
