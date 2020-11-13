@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash'
+import { isNull } from 'lodash'
 
 export const selectPlaylists = (state) => state.playlist
 export const selectApiFilter = (state) => state.playlist.apiFilter
@@ -7,4 +7,4 @@ export const selectAllPlaylists = (state) => state.playlist.playlists
 export const selectAllFilteredPlaylists = (state) =>
   state.playlist.playlistsFiltered
 export const selectIsFetchingPlaylists = (state) => state.playlist.isFetching
-export const selectHasErrorPlaylists = (state) => !isEmpty(state.playlist.error)
+export const selectHasErrorPlaylists = (state) => !isNull(state.playlist.error)

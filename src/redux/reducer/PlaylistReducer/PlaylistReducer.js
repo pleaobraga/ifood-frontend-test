@@ -4,7 +4,7 @@ import { isNull } from 'lodash'
 const initialState = {
   playlists: [],
   isFetching: false,
-  error: {},
+  error: null,
   playlistsFiltered: [],
   localFilter: '',
   apiFilter: '',
