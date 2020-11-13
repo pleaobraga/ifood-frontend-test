@@ -14,11 +14,24 @@ export const getPlaylistAPI = ({ filter = '', token }) =>
 
 const SPOTIFY_TOKEN_API = 'https://accounts.spotify.com/api/token'
 
-export const getTokenAPI = async (options) => {
+const auth = btoa(
+  `${process.env.APP_SPOTIFY_CLIENT_ID}:${process.env.APP_SPOTIFY_CLIENT_SECRET}`
+)
+
+const options = {
+  method: 'POST',
+  headers: new Headers({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: `Basic ${auth}`,
+  }),
+  body: 'grant_type=client_credentials',
+}
+
+export const getTokenAPI = async () => {
   try {
     const response = await fetch(SPOTIFY_TOKEN_API, options)
-    const resp = await response.json()
-    return resp
+    const result = await response.json()
+    return result
   } catch (e) {
     return e
   }
