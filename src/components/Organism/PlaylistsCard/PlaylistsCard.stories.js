@@ -65,7 +65,7 @@ export default storiesOf('Components | Organism/CardList', module)
         <PlaylistsCard
           playlistsFiltered={[]}
           isFetching={false}
-          error={{ error: 'error' }}
+          error={'error'}
         />
       </div>
     ),
