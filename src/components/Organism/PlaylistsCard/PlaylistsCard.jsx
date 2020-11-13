@@ -11,8 +11,7 @@ const PlaylistsCard = ({ className, playlistsFiltered, isFetching, error }) => {
   if (!isEmpty(error)) {
     return (
       <Typography className="play-lists__error" color="textPrimary">
-        Houve um erro ao apresentar o resultado, confira os filtros e tente
-        novamente
+        {error}
       </Typography>
     )
   }

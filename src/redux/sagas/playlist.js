@@ -30,13 +30,18 @@ function* getPlaylist({ filter }) {
     switch (status) {
       case 401:
         yield getNewToken()
-        yield put(getPlaylistRequest({ filter }))
+        yield put(
+          getPlaylistError({
+            error: 'Ocorreu um erro ao acessar os dados recarregue a pagina',
+          })
+        )
         break
 
       default:
         yield put(
           getPlaylistError({
-            error: 'An error occurred when trying to get the Playlist',
+            error:
+              'Houve um erro ao apresentar o resultado, confira os filtros e tente novamente',
           })
         )
     }

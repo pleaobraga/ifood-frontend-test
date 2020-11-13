@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
@@ -28,6 +28,19 @@ const PlaylitsPage = () => {
   const hasErrorPlaylists = useSelector(selectHasErrorPlaylists)
   const apiFilter = useSelector(selectApiFilter)
 
+  const debouncedPlaylist = useDebounce(playlists, DEBOUNCE_PLAYLIST_TIME)
+
+  const updatePlaylist = useCallback(() => {
+    !hasErrorPlaylists &&
+      dispatch(
+        getPlaylistRequest({ filter: apiFilter, updateIsFetching: false })
+      )
+  }, [dispatch, hasErrorPlaylists, apiFilter])
+
+  useEffect(() => {
+    updatePlaylist()
+  }, [debouncedPlaylist])
+
   const getFilter = useCallback(() => dispatch(getFilterRequest()), [dispatch])
 
   useEffect(() => {
@@ -42,19 +55,6 @@ const PlaylitsPage = () => {
   useEffect(() => {
     getPlaylist()
   }, [getPlaylist])
-
-  const updatePlaylist = useCallback(() => {
-    !hasErrorPlaylists &&
-      dispatch(
-        getPlaylistRequest({ filter: apiFilter, updateIsFetching: false })
-      )
-  }, [dispatch, hasErrorPlaylists, apiFilter])
-
-  const debouncedPlaylist = useDebounce(playlists, DEBOUNCE_PLAYLIST_TIME)
-
-  useEffect(() => {
-    updatePlaylist()
-  }, [debouncedPlaylist])
 
   const onSearchBarChange = useCallback(
     (filter) => dispatch(filterPlaylistAction({ filter })),
