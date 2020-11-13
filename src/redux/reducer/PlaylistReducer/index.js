@@ -4,7 +4,6 @@ export {
   selectHasErrorPlaylists,
   selectPlaylists,
   selectIsFetchingPlaylists,
-  selectAllFilteredPlaylists,
   selectApiFilter,
   selectLocalFilter,
 } from './PlaylistSelector'
