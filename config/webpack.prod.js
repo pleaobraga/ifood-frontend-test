@@ -10,6 +10,5 @@ module.exports = merge(common, {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[hash:8].js',
     chunkFilename: '[name].[hash:8].chunk.js',
-    publicPath: '/spotifood/',
   },
 })
