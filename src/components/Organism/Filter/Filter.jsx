@@ -21,7 +21,12 @@ import Loading from '../../Atom/Loading'
 import { StyledFilter } from './styles'
 import cx from 'classnames'
 
-const Filter = ({ onSearchBarChange, onFiltersChange, onPageError }) => {
+const Filter = ({
+  onSearchBarChange,
+  onFiltersChange,
+  onPageError,
+  className,
+}) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
   const filtersState = useSelector(selectFilters)
   const isFetchingFilters = useSelector(selectIsFetchingFilters)
@@ -63,7 +68,7 @@ const Filter = ({ onSearchBarChange, onFiltersChange, onPageError }) => {
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <StyledFilter component="header">
+      <StyledFilter component="header" className={className}>
         <Container maxWidth="lg">
           <Formik
             initialValues={initialValues}
@@ -108,6 +113,11 @@ Filter.propTypes = {
   onSearchBarChange: PropTypes.func,
   onFiltersChange: PropTypes.func,
   onPageError: PropTypes.bool,
+  className: PropTypes.string,
+}
+
+Filter.defaultProps = {
+  className: '',
 }
 
 export default Filter
