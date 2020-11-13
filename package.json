@@ -15,8 +15,9 @@
     "lint": "esw . --ext .js,.jsx  --color ",
     "lint:watch": "npm run lint -- --watch",
     "storybook": "start-storybook -p 9000 -c .storybook -s ./public",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "yarn deploy-storybook",
+    "deploy": "gh-pages -d docs ",
+    "deploy-storybook": "build-storybook -o ./docs"
   },
   "husky": {
     "hooks": {
