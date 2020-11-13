@@ -45,13 +45,15 @@ const PlaylitsPage = () => {
 
   const updatePlaylist = useCallback(() => {
     !hasErrorPlaylists &&
-      dispatch(getPlaylistRequest({ filter: '', updateIsFetching: false }))
-  }, [dispatch, hasErrorPlaylists])
+      dispatch(
+        getPlaylistRequest({ filter: apiFilter, updateIsFetching: false })
+      )
+  }, [dispatch, hasErrorPlaylists, apiFilter])
 
   const debouncedPlaylist = useDebounce(playlists, DEBOUNCE_PLAYLIST_TIME)
 
   useEffect(() => {
-    //updatePlaylist()
+    updatePlaylist()
   }, [debouncedPlaylist])
 
   const onSearchBarChange = useCallback(
