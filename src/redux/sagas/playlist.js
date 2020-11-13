@@ -31,7 +31,8 @@ function* getPlaylist({ filter }) {
         yield getNewToken()
         yield put(
           getPlaylistError({
-            error: 'Ocorreu um erro ao acessar os dados recarregue a pagina',
+            error:
+              'Ocorreu um erro ao obter os dados tente novamente recarregando a pagina',
           })
         )
         break

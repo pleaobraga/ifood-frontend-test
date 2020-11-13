@@ -1,8 +1,7 @@
 import addSeconds from 'date-fns/addSeconds'
 import formatISO from 'date-fns/formatISO'
 import compareAsc from 'date-fns/compareAsc'
-
-const SPOTIFY_TOKEN_API = 'https://accounts.spotify.com/api/token'
+import { getTokenAPI } from '../api/playlist'
 
 const auth = btoa(
   `${process.env.APP_SPOTIFY_CLIENT_ID}:${process.env.APP_SPOTIFY_CLIENT_SECRET}`
@@ -30,9 +29,7 @@ export const isTokenValid = () => {
 
 export const getNewToken = async () => {
   try {
-    const response = await fetch(SPOTIFY_TOKEN_API, options)
-
-    const { expires_in, access_token } = await response.json()
+    const { expires_in, access_token } = await getTokenAPI(options)
 
     const expireDate = addSeconds(new Date(), expires_in)
 
@@ -50,5 +47,5 @@ export const getToken = async () => {
     return localStorage.getItem('spotify_token')
   }
 
-  getNewToken()
+  return getNewToken()
 }
